@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ICNova Electronics Pvt. Ltd. — LED Lighting & Electronic Components</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,200;0,300;0,400;0,600;0,800;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#0a84ff; --cyan:#00d4ff; --green:#00ff88;
+  --amber:#ff8c00; --purple:#c800ff; --gold:#ffd700; --rose:#ff3366;
+  --dark:#0b0b14; --dark2:#0f0f1e; --dark3:#141428;
+  --surface:#161625; --surface2:#1c1c30;
+  --text:#c8d8f0; --muted:#6688bb; --white:#eef5ff;
+  /* category accent colors */
+  --led-c:#00d4ff;   --led-g:rgba(0,212,255,0.18);
+  --trk-c:#ff8c00;   --trk-g:rgba(255,140,0,0.18);
+  --out-c:#c800ff;   --out-g:rgba(200,0,255,0.18);
+  --cmp-c:#00ff88;   --cmp-g:rgba(0,255,136,0.18);
+  --drv-c:#ffd700;   --drv-g:rgba(255,215,0,0.18);
+}
+html{scroll-behavior:smooth}
+body{background:linear-gradient(160deg,#0c0c18 0%,#0e0c1c 40%,#0a0a14 100%);color:var(--text);font-family:'Exo 2',sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--blue),var(--cyan),var(--amber),var(--purple));border-radius:2px}
+
+/* ─── CANVAS PARTICLES ─── */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.85}
+
+
+/* ─── LOADER ─── */
+#loader{position:fixed;inset:0;background:#09090f;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;animation:loaderOut 0.5s ease 2.4s forwards}
+#loader.hide{display:none!important}
+@keyframes loaderOut{to{opacity:0;visibility:hidden;pointer-events:none;display:none}}
+.ld-logo{font-family:'Rajdhani',sans-serif;font-size:3.5rem;font-weight:700;letter-spacing:0.3em;background:linear-gradient(90deg,#0a84ff,#00d4ff,#00ff88,#ff8c00,#c800ff);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shift 2s linear infinite}
+@keyframes shift{0%{background-position:0%}100%{background-position:300%}}
+.ld-sub{font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.4em;color:var(--muted)}
+.ld-bar{width:300px;height:2px;background:rgba(255,255,255,0.05);overflow:hidden}
+.ld-fill{height:100%;background:linear-gradient(90deg,#0a84ff,#00d4ff,#ff8c00,#c800ff);background-size:200%;animation:lbar 2.5s ease forwards,shift 1s linear infinite}
+@keyframes lbar{from{width:0}to{width:100%}}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 5rem;transition:all 0.4s}
+nav.scrolled{background:rgba(3,11,24,0.97);backdrop-filter:blur(20px);padding:0.8rem 5rem;border-bottom:1px solid rgba(0,212,255,0.1)}
+.nav-brand{display:flex;align-items:center;gap:0.8rem;cursor:pointer;text-decoration:none}
+.nav-brand-icon{
+  width:62px !important;height:62px !important;
+  background:linear-gradient(135deg,#0a84ff 0%,#00d4ff 50%,#00ff88 100%);
+  display:flex;align-items:center;justify-content:center;
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  font-size:1.5rem !important;font-weight:900;color:#030b18;
+  font-family:'Rajdhani',sans-serif;
+  animation:hexPulse 2.5s ease-in-out infinite;
+  position:relative;flex-shrink:0;
+}
+@keyframes hexPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(0,212,255,0.5),0 0 15px rgba(0,212,255,0.3)}
+  50%{box-shadow:0 0 0 8px rgba(0,212,255,0),0 0 35px rgba(0,212,255,0.6)}
+}
+.nav-brand-main{
+  font-family:'Rajdhani',sans-serif;font-size:2rem !important;font-weight:700;
+  letter-spacing:0.08em;
+  background:linear-gradient(135deg,#ffffff 0%,#00d4ff 55%,#00ff88 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;line-height:1.1;
+}
+.nav-brand-main span{
+  background:linear-gradient(135deg,#00d4ff,#00ff88);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.nav-brand-sub{font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(0,212,255,0.75)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'Rajdhani',sans-serif;font-size:0.95rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;text-decoration:none;transition:color 0.3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--cyan);transition:width 0.3s}
+.nav-links a:hover,.nav-links a.active{color:var(--cyan)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{font-family:'Rajdhani',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--dark);background:linear-gradient(135deg,var(--blue),var(--cyan));padding:0.6rem 1.8rem;border:none;cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100%-8px) 100%,0% 100%);transition:all 0.3s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,132,255,0.4)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-toggle span{width:26px;height:2px;background:var(--cyan);transition:0.3s}
+
+/* ─── PAGES ─── */
+.page{display:none!important;position:relative;z-index:1}
+.page.active{display:block!important}
+
+/* ─── HERO ─── */
+#hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 55% 30%, rgba(80,0,200,0.55) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 95% 70%, rgba(0,180,255,0.35) 0%, transparent 45%),
+    radial-gradient(ellipse 45% 55% at 5%  60%, rgba(255,60,120,0.2) 0%, transparent 45%),
+    radial-gradient(ellipse 80% 40% at 50% 100%,rgba(40,0,100,0.7)  0%, transparent 55%),
+    linear-gradient(150deg, #0a0a14 0%, #0e0a1e 50%, #080812 100%);
+  animation:heroBgShift 10s ease-in-out infinite alternate;
+}
+@keyframes heroBgShift{
+  0%  {filter:brightness(1)    hue-rotate(0deg)}
+  33% {filter:brightness(1.15) hue-rotate(10deg)}
+  66% {filter:brightness(1.06) hue-rotate(-6deg)}
+  100%{filter:brightness(1.2)  hue-rotate(15deg)}
+}
+.hero-bg::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:
+    repeating-linear-gradient(90deg,rgba(0,212,255,0.05) 0,rgba(0,212,255,0.05) 1px,transparent 1px,transparent 90px),
+    repeating-linear-gradient(0deg, rgba(0,212,255,0.05) 0,rgba(0,212,255,0.05) 1px,transparent 1px,transparent 90px);
+}
+.hero-bg::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:
+    radial-gradient(ellipse 45% 45% at 70% 50%,rgba(0,200,255,0.18) 0%,transparent 60%),
+    radial-gradient(ellipse 30% 30% at 20% 80%,rgba(0,255,100,0.12) 0%,transparent 50%);
+  animation:heroGlow 5s ease-in-out infinite alternate;
+}
+@keyframes heroGlow{from{opacity:0.5}to{opacity:1}}
+.circuit-visual{position:absolute;right:-5%;top:50%;transform:translateY(-50%);width:55%;max-width:780px;opacity:0;animation:fadeInR 1.2s ease 0.8s forwards}
+@keyframes fadeInR{from{opacity:0;transform:translateY(-50%) translateX(60px)}to{opacity:1;transform:translateY(-50%) translateX(0)}}
+.glow-line{stroke-dasharray:5,10;animation:dash 20s linear infinite}
+.glow-line2{stroke-dasharray:3,15;animation:dash 30s linear infinite reverse}
+@keyframes dash{from{stroke-dashoffset:0}to{stroke-dashoffset:-1000}}
+.hero-content{position:relative;z-index:2;padding:0 5rem;max-width:680px;padding-top:6rem}
+.hero-badge{display:inline-flex;align-items:center;gap:0.6rem;font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.2em;color:var(--cyan);border:1px solid rgba(0,212,255,0.3);padding:0.4rem 1rem;margin-bottom:2rem;opacity:0;animation:fadeUp 0.8s ease 0.4s forwards}
+.badge-dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.hero-title{font-family:'Rajdhani',sans-serif;font-size:clamp(3.5rem,7.5vw,8rem);font-weight:700;line-height:0.88;letter-spacing:-0.02em;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.9s ease 0.6s forwards}
+.t1{color:var(--white)}
+.t2{background:linear-gradient(90deg,#0a84ff,#00d4ff,#ff8c00);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shift 4s linear infinite}
+.t3{color:var(--white)}
+.hero-sub{font-size:1.2rem;font-weight:300;color:rgba(180,210,255,0.9);line-height:1.75;max-width:540px;margin-bottom:3rem;opacity:0;animation:fadeUp 0.8s ease 0.8s forwards}
+.hero-sub span{color:var(--cyan)}
+.hero-actions{display:flex;gap:1.2rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s ease 1s forwards}
+.hero-stats{display:flex;gap:3rem;margin-top:4rem;opacity:0;animation:fadeUp 0.8s ease 1.2s forwards;padding-top:3rem;border-top:1px solid rgba(0,212,255,0.1)}
+.hstat-val{font-family:'Rajdhani',sans-serif;font-size:2.5rem;font-weight:700;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hstat-lbl{font-size:0.72rem;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-top:0.2rem}
+.scroll-ind{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;opacity:0;animation:fadeUp 0.8s ease 1.5s forwards}
+.scroll-ind span{font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:0.3em;color:var(--muted);text-transform:uppercase}
+.scroll-line{width:1px;height:50px;background:linear-gradient(var(--cyan),transparent);animation:scrollA 1.8s ease-in-out infinite}
+@keyframes scrollA{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(0.3);opacity:0.3}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── BTNs ─── */
+.btn-primary{font-family:'Rajdhani',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--dark);background:linear-gradient(135deg,var(--blue),var(--cyan));padding:1rem 2.5rem;border:none;cursor:pointer;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all 0.3s}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,132,255,0.4)}
+.btn-ghost{font-family:'Rajdhani',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--cyan);background:transparent;padding:1rem 2.5rem;border:1px solid rgba(0,212,255,0.4);cursor:pointer;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all 0.3s}
+.btn-ghost:hover{background:rgba(0,212,255,0.08);border-color:var(--cyan);transform:translateY(-3px)}
+
+/* ─── MARQUEE ─── */
+.marquee-wrap{overflow:hidden;background:linear-gradient(135deg,rgba(0,132,255,0.15),rgba(200,0,255,0.1),rgba(255,140,0,0.12));border-top:1px solid rgba(0,212,255,0.2);border-bottom:1px solid rgba(255,140,0,0.2);padding:1.1rem 0}
+.marquee-track{display:flex;gap:2.5rem;white-space:nowrap;animation:marquee 28s linear infinite}
+.m-item{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase}
+.m-c1{color:var(--cyan)}.m-c2{color:var(--amber)}.m-c3{color:var(--green)}.m-c4{color:var(--purple)}.m-dot{color:rgba(255,255,255,0.5);font-size:1.1rem}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ─── SECTIONS ─── */
+section{padding:8rem 5rem}
+.sec-label{font-family:'Share Tech Mono',monospace;font-size:0.75rem;letter-spacing:0.45em;color:#44eeff;text-transform:uppercase;margin-bottom:1rem;text-shadow:0 0 15px rgba(0,212,255,0.6)}
+.sec-title{font-family:'Rajdhani',sans-serif;font-size:clamp(2.4rem,5vw,4.8rem);font-weight:700;line-height:1;margin-bottom:1.5rem;letter-spacing:-0.01em}
+.sec-title span{background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sec-title .amber{background:linear-gradient(135deg,var(--amber),#ffcc44);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sec-title .purple{background:linear-gradient(135deg,var(--purple),#ff44cc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sec-title .green{background:linear-gradient(135deg,var(--green),#44ffaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.divider{width:80px;height:2px;background:linear-gradient(90deg,#0a84ff,#00d4ff,#00ff88);margin-bottom:3rem;box-shadow:0 0 12px rgba(0,212,255,0.5)}
+.divider-amber{background:linear-gradient(90deg,var(--amber),#ffcc44)}
+.divider-purple{background:linear-gradient(90deg,var(--purple),#ff44cc)}
+.divider-green{background:linear-gradient(90deg,var(--green),#44ffaa)}
+
+/* ─── PRODUCT CATEGORIES GRID ─── */
+.pcat-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:3rem}
+.pcat-card{position:relative;overflow:hidden;background:var(--surface2);cursor:pointer;transition:all 0.4s;min-height:300px;display:flex;align-items:flex-end}
+.pcat-card:hover{transform:scale(0.99)}
+.pcat-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.35;transition:opacity 0.4s}
+.pcat-card:hover .pcat-img{opacity:0.55}
+.pcat-overlay{position:absolute;inset:0;transition:opacity 0.4s}
+.pcat-content{position:relative;z-index:2;padding:2.5rem;width:100%;background:linear-gradient(transparent,rgba(3,11,24,0.95) 55%)}
+.pcat-num{font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.3em;margin-bottom:0.6rem}
+.pcat-title{font-family:'Rajdhani',sans-serif;font-size:1.8rem;font-weight:700;color:var(--white);margin-bottom:0.4rem}
+.pcat-sub{font-size:0.82rem;color:var(--muted);margin-bottom:1.2rem}
+.pcat-link{font-family:'Rajdhani',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;display:inline-flex;align-items:center;gap:0.5rem;transition:gap 0.3s}
+.pcat-card:hover .pcat-link{gap:1rem}
+
+/* ─── SERVICES ─── */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.service-card{background:#13131e;border:1px solid rgba(80,60,200,0.12);padding:3rem 2.5rem;position:relative;overflow:hidden;transition:all 0.4s;cursor:pointer}
+.service-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width 0.4s}
+.service-card:hover::after{width:100%}
+.service-card:hover{border-color:rgba(0,212,255,0.25);transform:translateY(-5px)}
+.sc-icon{width:65px;height:65px;background:linear-gradient(135deg,rgba(0,132,255,0.15),rgba(0,212,255,0.05));border:1px solid rgba(0,212,255,0.2);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:1.8rem;clip-path:polygon(20% 0%,80% 0%,100% 20%,100% 80%,80% 100%,20% 100%,0% 80%,0% 20%);transition:all 0.4s}
+.service-card:hover .sc-icon{transform:scale(1.1);background:linear-gradient(135deg,rgba(0,132,255,0.3),rgba(0,212,255,0.15))}
+.sc-num{position:absolute;top:1.5rem;right:2rem;font-family:'Share Tech Mono',monospace;font-size:3rem;color:rgba(0,212,255,0.04);font-weight:bold}
+.sc-title{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:0.8rem;color:var(--white);letter-spacing:0.02em}
+.sc-desc{font-size:0.85rem;color:var(--muted);line-height:1.7}
+
+/* ─── WHY US ─── */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.why-card{padding:2.5rem 2rem;background:#13131e;border:1px solid rgba(120,80,255,0.1);text-align:center;transition:all 0.3s;position:relative;overflow:hidden}
+.why-card:hover{transform:translateY(-5px)}
+.why-card::before{content:'';position:absolute;inset:0;opacity:0;transition:0.3s}
+.why-card.wc-blue::before{background:linear-gradient(135deg,rgba(0,132,255,0.08),transparent)}
+.why-card.wc-amber::before{background:linear-gradient(135deg,rgba(255,140,0,0.08),transparent)}
+.why-card.wc-green::before{background:linear-gradient(135deg,rgba(0,255,136,0.08),transparent)}
+.why-card.wc-purple::before{background:linear-gradient(135deg,rgba(200,0,255,0.08),transparent)}
+.why-card:hover::before{opacity:1}
+.why-card.wc-blue{border-top:2px solid var(--blue)}.why-card.wc-amber{border-top:2px solid var(--amber)}.why-card.wc-green{border-top:2px solid var(--green)}.why-card.wc-purple{border-top:2px solid var(--purple)}
+.why-icon{width:80px;height:80px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center;border-radius:50%;position:relative;transition:transform 0.3s}
+.why-title{font-family:'Rajdhani',sans-serif;font-size:1.25rem;font-weight:700;margin-bottom:0.7rem;color:var(--white);letter-spacing:0.03em}
+.why-desc{font-size:0.9rem;color:rgba(160,190,230,0.85);line-height:1.65}
+
+/* ─── PRODUCT CARDS ─── */
+.prod-filter{display:flex;gap:0;margin-bottom:3rem;flex-wrap:wrap}
+.filter-btn{font-family:'Rajdhani',sans-serif;font-size:0.82rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.75rem 1.8rem;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:transparent;color:var(--muted);transition:all 0.3s}
+.filter-btn:hover{color:var(--text);border-color:rgba(0,212,255,0.3)}
+.filter-btn.active{background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--dark);border-color:transparent}
+.filter-btn.active.trk{background:linear-gradient(135deg,var(--amber),#ffcc44)}
+.filter-btn.active.out{background:linear-gradient(135deg,var(--purple),#ff44cc)}
+.filter-btn.active.cmp{background:linear-gradient(135deg,var(--green),#44ffaa)}
+.filter-btn.active.drv{background:linear-gradient(135deg,var(--gold),#ffee66);color:#1a1a00}
+
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.5rem}
+.prod-card{background:var(--surface);border:1px solid rgba(255,255,255,0.04);overflow:hidden;cursor:pointer;transition:all 0.35s}
+.prod-card:hover{transform:translateY(-6px)}
+
+/* Category-specific card themes */
+.prod-card.c-led{border-color:rgba(0,212,255,0.05)}
+.prod-card.c-led:hover{border-color:rgba(0,212,255,0.4);box-shadow:0 15px 45px rgba(0,212,255,0.1)}
+.prod-card.c-track{border-color:rgba(255,140,0,0.05)}
+.prod-card.c-track:hover{border-color:rgba(255,140,0,0.4);box-shadow:0 15px 45px rgba(255,140,0,0.1)}
+.prod-card.c-outdoor{border-color:rgba(200,0,255,0.05)}
+.prod-card.c-outdoor:hover{border-color:rgba(200,0,255,0.4);box-shadow:0 15px 45px rgba(200,0,255,0.1)}
+.prod-card.c-components{border-color:rgba(0,255,136,0.05)}
+.prod-card.c-components:hover{border-color:rgba(0,255,136,0.4);box-shadow:0 15px 45px rgba(0,255,136,0.1)}
+.prod-card.c-drivers{border-color:rgba(255,215,0,0.05)}
+.prod-card.c-drivers:hover{border-color:rgba(255,215,0,0.4);box-shadow:0 15px 45px rgba(255,215,0,0.1)}
+
+.prod-img-wrap{height:210px;position:relative;overflow:hidden;background:var(--dark2)}
+.prod-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s}
+.prod-card:hover .prod-img-wrap img{transform:scale(1.07)}
+.prod-img-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem}
+.prod-img-glow{position:absolute;inset:0;opacity:0;transition:opacity 0.4s;pointer-events:none}
+.prod-card:hover .prod-img-glow{opacity:1}
+.prod-badge{position:absolute;top:1rem;left:1rem;font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;padding:0.22rem 0.6rem;z-index:3;font-weight:bold}
+.prod-badge.led{background:linear-gradient(135deg,#0a84ff,#00d4ff);color:#000}
+.prod-badge.trk{background:linear-gradient(135deg,#ff8c00,#ffcc44);color:#000}
+.prod-badge.out{background:linear-gradient(135deg,#c800ff,#ff44cc);color:#fff}
+.prod-badge.cmp{background:linear-gradient(135deg,#00aa55,#00ff88);color:#000}
+.prod-badge.drv{background:linear-gradient(135deg,#cc9900,#ffd700);color:#000}
+
+.prod-info{padding:1.5rem}
+.prod-cat{font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:0.18em;margin-bottom:0.4rem}
+.prod-name{font-family:'Rajdhani',sans-serif;font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:0.9rem}
+.prod-specs{display:flex;flex-wrap:wrap;gap:0.4rem}
+.spec-tag{font-size:0.63rem;padding:0.2rem 0.55rem;letter-spacing:0.05em;font-family:'Share Tech Mono',monospace;border-width:1px;border-style:solid}
+.s-led{color:var(--led-c);border-color:rgba(0,212,255,0.25)}.s-trk{color:var(--trk-c);border-color:rgba(255,140,0,0.25)}.s-out{color:var(--out-c);border-color:rgba(200,0,255,0.25)}.s-cmp{color:var(--cmp-c);border-color:rgba(0,255,136,0.25)}.s-drv{color:var(--drv-c);border-color:rgba(255,215,0,0.25)}
+
+/* ─── ABOUT ─── */
+.about-split{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.about-visual{position:relative}
+.about-big-box{width:100%;aspect-ratio:1;background:var(--surface);border:1px solid rgba(0,212,255,0.15);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.about-year-badge{position:absolute;bottom:-1rem;right:-1rem;background:linear-gradient(135deg,var(--blue),var(--cyan));padding:1.8rem 2rem;text-align:center}
+.aby-num{font-family:'Rajdhani',sans-serif;font-size:1.8rem;font-weight:700;color:var(--dark);line-height:1}
+.aby-lbl{font-size:0.65rem;font-weight:600;letter-spacing:0.2em;color:rgba(3,11,24,0.7);text-transform:uppercase}
+.facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3.5rem}
+.fact-card{background:var(--surface);border:1px solid rgba(0,212,255,0.08);padding:1.8rem;position:relative;overflow:hidden}
+.fact-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.fact-card.fc1::before{background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.fact-card.fc2::before{background:linear-gradient(90deg,var(--amber),#ffcc44)}
+.fact-card.fc3::before{background:linear-gradient(90deg,var(--green),#44ffaa)}
+.fact-card.fc4::before{background:linear-gradient(90deg,var(--purple),#ff44cc)}
+.fc-num{font-family:'Rajdhani',sans-serif;font-size:2.2rem;font-weight:700;line-height:1}
+.fc1 .fc-num{background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.fc2 .fc-num{background:linear-gradient(135deg,var(--amber),#ffcc44);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.fc3 .fc-num{background:linear-gradient(135deg,var(--green),#44ffaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.fc4 .fc-num{background:linear-gradient(135deg,var(--purple),#ff44cc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.fc-lbl{font-size:0.75rem;color:var(--muted);margin-top:0.4rem;letter-spacing:0.05em}
+
+/* ─── DIRECTORS ─── */
+.dir-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:4rem}
+.dir-card{background:var(--surface);border:1px solid rgba(0,212,255,0.1);overflow:hidden;position:relative;transition:all 0.4s}
+.dir-card:hover{border-color:rgba(0,212,255,0.35);box-shadow:0 0 40px rgba(0,132,255,0.12)}
+.dir-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--amber),var(--purple));background-size:300%;animation:shift 4s linear infinite}
+.dir-photo-wrap{height:260px;position:relative;background:var(--dark3);overflow:hidden}
+.dir-photo-wrap img{width:100%;height:100%;object-fit:cover}
+.dir-photo-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:7rem;background:linear-gradient(135deg,var(--dark3),var(--surface))}
+.dir-info{padding:2.5rem}
+.dir-name{font-family:'Rajdhani',sans-serif;font-size:1.8rem;font-weight:700;color:var(--white);margin-bottom:0.3rem}
+.dir-role{font-family:'Share Tech Mono',monospace;font-size:0.75rem;letter-spacing:0.2em;color:var(--cyan);margin-bottom:2rem}
+.dir-contacts{display:flex;flex-direction:column;gap:0.8rem}
+.dir-ci{display:flex;align-items:center;gap:0.8rem;font-size:0.88rem;color:var(--muted)}
+.dir-ci .ico{width:32px;height:32px;min-width:32px;background:rgba(0,132,255,0.1);border:1px solid rgba(0,212,255,0.2);display:flex;align-items:center;justify-content:center;font-size:0.85rem}
+.dir-ci a{color:var(--text);text-decoration:none;transition:color 0.3s}
+.dir-ci a:hover{color:var(--cyan)}
+
+/* ─── CONTACT ─── */
+.contact-layout{display:grid;grid-template-columns:1fr 1.3fr;min-height:100vh}
+.contact-left{background:var(--dark2);padding:10rem 4rem 4rem;border-right:1px solid rgba(0,212,255,0.08);position:relative;overflow:hidden}
+.contact-right{padding:10rem 5rem 4rem}
+.cd-wrap{display:flex;gap:1rem;margin-bottom:2.5rem;align-items:flex-start}
+.cd-icon{width:50px;height:50px;min-width:50px;background:linear-gradient(135deg,rgba(0,132,255,0.15),rgba(0,212,255,0.05));border:1px solid rgba(0,212,255,0.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;clip-path:polygon(20% 0%,80% 0%,100% 20%,100% 80%,80% 100%,20% 100%,0% 80%,0% 20%);transition:all 0.3s}
+.cd-wrap:hover .cd-icon{border-color:var(--cyan);background:rgba(0,212,255,0.15)}
+.cd-text h4{font-family:'Rajdhani',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.3rem}
+.cd-text p{font-size:0.88rem;color:var(--muted);line-height:1.5}
+.cd-text a{color:var(--text);text-decoration:none;transition:color 0.3s}
+.cd-text a:hover{color:var(--cyan)}
+.form-group{margin-bottom:1.5rem}
+.form-group label{font-family:'Share Tech Mono',monospace;font-size:0.68rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:0.6rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--surface);border:1px solid rgba(0,212,255,0.1);color:var(--text);font-family:'Exo 2',sans-serif;font-size:0.9rem;padding:0.9rem 1.2rem;outline:none;transition:border-color 0.3s,box-shadow 0.3s;-webkit-appearance:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 1px rgba(0,212,255,0.08)}
+.form-group textarea{resize:vertical;min-height:130px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-note{font-size:0.75rem;color:var(--muted);margin-top:0.4rem;font-family:'Share Tech Mono',monospace;letter-spacing:0.05em}
+
+/* STATUS MESSAGES */
+.form-msg{display:none;padding:1rem 1.5rem;margin-top:1rem;font-family:'Share Tech Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;border-width:1px;border-style:solid}
+.form-msg.success{background:rgba(0,255,136,0.06);border-color:rgba(0,255,136,0.3);color:var(--green)}
+.form-msg.error{background:rgba(255,51,102,0.06);border-color:rgba(255,51,102,0.3);color:var(--rose)}
+.form-msg.loading{background:rgba(0,212,255,0.06);border-color:rgba(0,212,255,0.3);color:var(--cyan)}
+
+/* ─── PRODUCTS PAGE HERO ─── */
+.prod-page-hero{padding:10rem 5rem 5rem;background:var(--dark2);position:relative;overflow:hidden}
+.prod-page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 100% at 80% 50%,rgba(0,132,255,0.08),rgba(200,0,255,0.04),transparent 70%)}
+
+/* ─── FOOTER ─── */
+footer{background:linear-gradient(160deg,#0d0d20 0%,#0a0a18 100%);border-top:2px solid rgba(0,212,255,0.15);padding:5rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:4rem}
+.fn{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;letter-spacing:0.1em;color:var(--white)}
+.fn span{color:var(--cyan)}
+.ft{font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:0.3em;color:var(--muted);text-transform:uppercase;margin-bottom:0.8rem}
+.fd{font-size:0.83rem;color:var(--muted);line-height:1.7;max-width:260px;margin-top:0.8rem}
+.footer-col h4{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.5rem}
+.footer-col ul{list-style:none}
+.footer-col ul li{font-size:0.95rem;color:rgba(180,200,240,0.8);margin-bottom:0.8rem;cursor:pointer;transition:color 0.3s}
+.footer-col ul li:hover{color:var(--text)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(0,212,255,0.08);padding-top:2rem;font-size:0.85rem;color:rgba(160,180,220,0.7);font-family:'Share Tech Mono',monospace}
+.socials{display:flex;gap:0.8rem}
+
+
+
+/* ─── MOBILE ─── */
+#mobileMenu{display:none;position:fixed;inset:0;background:rgba(3,11,24,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mob-link{font-family:'Rajdhani',sans-serif;font-size:2rem;font-weight:700;letter-spacing:0.2em;color:var(--text);cursor:pointer;text-decoration:none;transition:color 0.3s}
+.mob-link:hover{color:var(--cyan)}
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}nav.scrolled{padding:0.7rem 1.5rem}
+  .nav-links,.nav-cta{display:none}.nav-toggle{display:flex}
+  section{padding:5rem 1.5rem}
+  .hero-content{padding:0 1.5rem;padding-top:5rem}
+  .hero-title{font-size:clamp(2.5rem,10vw,5rem)}.circuit-visual{display:none}
+  .hero-stats{gap:1.5rem;flex-wrap:wrap}
+  .pcat-grid,.dir-grid,.about-split{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .contact-layout{grid-template-columns:1fr}
+  .contact-right{padding:3rem 1.5rem}.contact-left{padding:8rem 1.5rem 3rem}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center}
+  .form-row{grid-template-columns:1fr}
+  .prod-page-hero{padding:8rem 1.5rem 3rem}
+  .facts-grid{grid-template-columns:1fr 1fr}
+}
+
+/* ── WHATSAPP FLOAT ── */
+.wa-float{position:fixed;bottom:28px;right:28px;width:58px;height:58px;background:linear-gradient(135deg,#25d366,#128c7e);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:9998;box-shadow:0 4px 20px rgba(37,211,102,0.5);cursor:pointer;text-decoration:none;animation:waPulse 2.5s ease-in-out infinite}
+.wa-float:hover{transform:scale(1.12)}
+.wa-float svg{width:28px;height:28px;display:block}
+@keyframes waPulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.5)}50%{box-shadow:0 4px 40px rgba(37,211,102,0.8),0 0 0 8px rgba(37,211,102,0.15)}}
+/* ── BACK TO TOP ── */
+.back-top{position:fixed;bottom:100px;right:28px;width:42px;height:42px;background:rgba(0,132,255,0.15);border:1px solid rgba(0,212,255,0.3);border-radius:50%;display:none;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;z-index:9997;transition:all 0.3s;color:#fff;text-decoration:none}
+.back-top:hover{background:rgba(0,212,255,0.25);transform:translateY(-3px)}
+.back-top.show{display:flex}
+/* ── SOCIAL ICONS ── */
+.socials{display:flex;gap:10px;align-items:center}
+.soc-link{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform 0.25s,box-shadow 0.25s;flex-shrink:0}
+.soc-link:hover{transform:translateY(-4px)}
+.soc-link svg{width:22px;height:22px;display:block}
+.soc-link.fb{background:#1877f2;box-shadow:0 4px 14px rgba(24,119,242,0.45)}
+.soc-link.ig{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%);box-shadow:0 4px 14px rgba(214,36,159,0.45)}
+.soc-link.wa{background:#25d366;box-shadow:0 4px 14px rgba(37,211,102,0.45)}
+.soc-link.yt{background:#ff0000;box-shadow:0 4px 14px rgba(255,0,0,0.4)}
+.soc-link.li{background:#0a66c2;box-shadow:0 4px 14px rgba(10,102,194,0.4)}
+/* ── SERVICE CARD SVG ICONS ── */
+.sc-icon{width:70px;height:70px;background:linear-gradient(135deg,rgba(10,26,50,0.9),rgba(13,31,60,0.8));border:1px solid rgba(0,212,255,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:1.8rem;clip-path:polygon(20% 0%,80% 0%,100% 20%,100% 80%,80% 100%,20% 100%,0% 80%,0% 20%);transition:all 0.4s;box-shadow:0 0 20px rgba(0,212,255,0.08)}
+.service-card:hover .sc-icon{transform:scale(1.12);box-shadow:0 0 30px rgba(0,212,255,0.2)}
+/* ── PRODUCT IMAGES ── */
+.prod-img-wrap{height:200px !important;overflow:hidden !important;position:relative;background:var(--dark2)}
+.prod-img-wrap img{width:100% !important;height:200px !important;object-fit:cover !important;object-position:center center !important;display:block !important;position:relative;z-index:2;transition:transform 0.5s}
+.prod-card:hover .prod-img-wrap img{transform:scale(1.06)}
+.prod-img-fallback{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;font-size:5rem}
+/* ── CATEGORY CARDS ── */
+.pcat-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:3rem}
+.pcat-card{height:340px;overflow:hidden;position:relative;background:var(--surface2);cursor:pointer;transition:transform 0.4s,box-shadow 0.4s;display:flex;align-items:flex-end}
+.pcat-card:hover{transform:scale(1.015) translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.pcat-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.35;transition:transform 0.6s,opacity 0.4s}
+.pcat-card:hover .pcat-img{transform:scale(1.08);opacity:0.6}
+.pcat-overlay{position:absolute;inset:0}
+.pcat-content{position:relative;z-index:2;padding:2.5rem;width:100%;background:linear-gradient(transparent,rgba(3,11,24,0.95) 55%);transition:transform 0.4s}
+.pcat-card:hover .pcat-content{transform:translateY(-6px)}
+.pcat-num{font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.3em;margin-bottom:0.6rem}
+.pcat-title{font-family:'Rajdhani',sans-serif;font-size:1.8rem;font-weight:700;color:#fff;margin-bottom:0.4rem}
+.pcat-sub{font-size:0.82rem;color:var(--muted);margin-bottom:1.2rem}
+.pcat-link{font-family:'Rajdhani',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase}
+.pcat-dmx-full{grid-column:1/-1 !important;height:200px !important}
+/* ── ABOUT LOGO BOX ── */
+.about-logo-box{width:100%;background:var(--surface);border:1px solid rgba(0,212,255,0.15);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:3rem 2rem;min-height:380px}
+/* ── HERO LOGO ── */
+/* ── DIRECTORS CIRCLE — DEFINITIVE ── */
+.dir-row1{display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;margin-bottom:3rem}
+.dir-row2{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
+.dir-person{display:flex;flex-direction:column;align-items:center;text-align:center;width:190px;cursor:pointer;transition:transform 0.3s}
+.dir-person:hover{transform:translateY(-8px)}
+.dir-circle-wrap{width:200px !important;height:200px !important;border-radius:50% !important;position:relative !important;flex-shrink:0 !important;margin-bottom:1.5rem;background:transparent !important;animation:none !important}
+@keyframes pulseRing{
+  0%,100%{box-shadow:0 0 0 4px #00d4ff,0 0 25px rgba(0,212,255,0.7),0 0 55px rgba(0,132,255,0.35)}
+  25%    {box-shadow:0 0 0 4px #00ff88,0 0 25px rgba(0,255,136,0.7),0 0 55px rgba(0,200,100,0.35)}
+  50%    {box-shadow:0 0 0 4px #c800ff,0 0 25px rgba(200,0,255,0.7),0 0 55px rgba(150,0,200,0.35)}
+  75%    {box-shadow:0 0 0 4px #ff8c00,0 0 25px rgba(255,140,0,0.7), 0 0 55px rgba(255,100,0,0.35)}
+}
+.dir-circle-border{display:none !important}
+.dir-circle-inner{position:absolute !important;top:3px !important;left:3px !important;right:3px !important;bottom:3px !important;border-radius:50% !important;overflow:hidden !important;background:#0a1628 !important;animation:pulseRing 4s ease-in-out infinite}
+.dir-circle-inner img{position:absolute !important;top:0 !important;left:0 !important;width:100% !important;height:100% !important;object-fit:cover !important;object-position:center center !important;display:block !important;z-index:2 !important}
+.dir-circle-fallback{position:absolute !important;top:0 !important;left:0 !important;width:100% !important;height:100% !important;display:flex !important;align-items:center !important;justify-content:center !important;font-size:4rem !important;z-index:1 !important;background:linear-gradient(135deg,#0a1628,#112244) !important}
+.dir-p-name{font-family:'Rajdhani',sans-serif;font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:0.25rem}
+.dir-p-role{font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;color:#00d4ff;margin-bottom:0.8rem}
+.dir-p-phone,.dir-p-email{font-size:0.78rem;color:#8899aa;margin-bottom:0.2rem}
+.dir-p-phone a,.dir-p-email a{color:#8899aa;text-decoration:none;transition:color 0.3s}
+.dir-p-phone a:hover,.dir-p-email a:hover{color:#00d4ff}
+/* ── DMX ── */
+:root{--dmx-c:#e040fb}
+.c-dmx{border-left:2px solid var(--dmx-c)}
+.s-dmx{background:rgba(224,64,251,0.12);color:#e040fb;border-color:rgba(224,64,251,0.3)}
+.prod-badge.dmx{background:rgba(224,64,251,0.15);color:#e040fb;border:1px solid rgba(224,64,251,0.3)}
+@media(max-width:900px){
+  .dir-row1,.dir-row2{gap:2rem}
+  .dir-person{width:145px}
+  .dir-circle-wrap{width:150px !important;height:150px !important}
+  .pcat-grid{grid-template-columns:1fr}
+  .pcat-dmx-full{height:280px !important}
+}
+
+/* ═══ COLORFUL SECTION GLOWS ═══ */
+.services-grid,.why-grid,.prod-grid,.footer-grid{position:relative;z-index:1}
+
+
+/* ═══ SERVICE CARD ICON — ENLARGED ═══ */
+.sc-icon{width:90px !important;height:90px !important;background:linear-gradient(145deg,rgba(0,15,45,0.97),rgba(5,20,55,0.95)) !important;
+  border:1.5px solid rgba(0,212,255,0.2) !important;display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.8rem;clip-path:polygon(20% 0%,80% 0%,100% 20%,100% 80%,80% 100%,20% 100%,0% 80%,0% 20%);
+  transition:all 0.4s;box-shadow:0 4px 30px rgba(0,212,255,0.12)}
+.sc-icon svg,.sc-icon>*{display:block}
+.service-card:hover .sc-icon{transform:scale(1.12);box-shadow:0 4px 40px rgba(0,212,255,0.3);background:linear-gradient(145deg,rgba(0,30,80,0.95),rgba(0,50,120,0.9)) !important}
+
+/* ═══ MOBILE RESPONSIVE ═══ */
+@media(max-width:768px){
+  .dir-row1,.dir-row2{gap:1.5rem !important}
+  .dir-person{width:140px !important}
+  .dir-circle-wrap{width:150px !important;height:150px !important}
+  .services-grid{grid-template-columns:1fr !important}
+  .why-grid{grid-template-columns:1fr 1fr !important}
+  .about-split,.footer-grid{grid-template-columns:1fr !important}
+  section{padding:4rem 1.5rem !important}
+  .prod-grid{grid-template-columns:1fr 1fr !important}
+  .hero-title{font-size:2.8rem !important}
+  .pcat-card{height:200px !important}
+  .sc-icon{width:72px !important;height:72px !important}
+}
+@media(max-width:480px){
+  .dir-row1,.dir-row2{gap:1rem !important}
+  .dir-person{width:120px !important}
+  .dir-circle-wrap{width:130px !important;height:130px !important}
+  .why-grid{grid-template-columns:1fr !important}
+  .prod-grid{grid-template-columns:1fr !important}
+  .hero-title{font-size:2.2rem !important}
+  .sc-icon{width:62px !important;height:62px !important}
+  .soc-link{width:36px !important;height:36px !important}
+  .navbar{padding:0.8rem 1rem !important}
+}
+
+
+/* ═══ SCROLL REVEAL ANIMATIONS ═══ */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-50px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(50px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-scale{opacity:0;transform:scale(0.88);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+.reveal-delay-4{transition-delay:0.4s}
+.reveal-delay-5{transition-delay:0.5s}
+</style>
+</head>
+<body>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="particles"></canvas>
+<a class="wa-float" href="https://wa.me/916395107577?text=Hello%20ICNova%2C%20I%20am%20interested%20in%20your%20products." target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<a class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8679;</a>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-logo">ICNOVA</div>
+  <div class="ld-sub">Electronics Pvt. Ltd.</div>
+  <div class="ld-bar"><div class="ld-fill"></div></div>
+  <div style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.15em">// Initializing System...</div>
+</div>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu">
+  <a class="mob-link" onclick="showPage('home');toggleMob()">HOME</a>
+  <a class="mob-link" onclick="showPage('products');toggleMob()">PRODUCTS</a>
+  <a class="mob-link" onclick="showPage('about');toggleMob()">ABOUT US</a>
+  <a class="mob-link" onclick="showPage('contact');toggleMob()">CONTACT</a>
+  <button class="btn-primary" onclick="showPage('contact');toggleMob()">Send Enquiry</button>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-brand" onclick="showPage('home')">
+    <div class="nav-brand-icon">IC</div>
+    <div>
+      <div class="nav-brand-main">IC<span>Nova</span></div>
+      <div class="nav-brand-sub">Electronics Pvt. Ltd.</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a id="nav-home" class="active" onclick="showPage('home')">Home</a></li>
+    <li><a id="nav-products" onclick="showPage('products')">Products</a></li>
+    <li><a id="nav-about" onclick="showPage('about')">About Us</a></li>
+    <li><a id="nav-contact" onclick="showPage('contact')">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="showPage('contact')">Send Enquiry</button>
+  <div class="nav-toggle" onclick="toggleMob()"><span></span><span></span><span></span></div>
+</nav>
+
+
+<!-- ══════════════════════ HOME ══════════════════════ -->
+<div class="page active" id="page-home">
+
+<section id="hero" style="padding:0">
+  <div class="hero-bg"></div>
+
+  <!-- BIG ANIMATED CIRCUIT VISUAL -->
+  <div class="circuit-visual">
+    <svg viewBox="0 0 700 600" fill="none" style="width:100%;height:100%">
+      <defs>
+        <radialGradient id="bg1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#0a84ff" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#030b18" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="gA"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="gB"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <rect width="700" height="600" fill="url(#bg1)" rx="10"/>
+      <!-- Grid -->
+      <g stroke="#0a84ff" stroke-width="0.8" opacity="0.2">
+        <line x1="100" y1="0" x2="100" y2="600"/><line x1="200" y1="0" x2="200" y2="600"/><line x1="300" y1="0" x2="300" y2="600"/><line x1="400" y1="0" x2="400" y2="600"/><line x1="500" y1="0" x2="500" y2="600"/><line x1="600" y1="0" x2="600" y2="600"/>
+        <line x1="0" y1="100" x2="700" y2="100"/><line x1="0" y1="200" x2="700" y2="200"/><line x1="0" y1="300" x2="700" y2="300"/><line x1="0" y1="400" x2="700" y2="400"/><line x1="0" y1="500" x2="700" y2="500"/>
+      </g>
+      <!-- Glowing traces -->
+      <g filter="url(#gA)" stroke-width="2">
+        <polyline points="100,100 200,100 200,200 400,200" stroke="#00d4ff" class="glow-line"/>
+        <polyline points="400,100 400,300 600,300 600,200" stroke="#ff8c00" class="glow-line2"/>
+        <polyline points="100,400 200,400 200,300 300,300" stroke="#00ff88" class="glow-line"/>
+        <polyline points="300,500 500,500 500,400 600,400" stroke="#c800ff" class="glow-line2"/>
+        <polyline points="100,300 100,500 200,500" stroke="#00d4ff" class="glow-line"/>
+      </g>
+      <!-- Central IC -->
+      <rect x="260" y="210" width="130" height="100" fill="#0a1628" stroke="#00d4ff" stroke-width="2" filter="url(#gA)"/>
+      <rect x="270" y="220" width="110" height="80" fill="#061020" stroke="#0a84ff" stroke-width="1"/>
+      <g stroke="#00d4ff" stroke-width="2" filter="url(#gA)">
+        <line x1="240" y1="225" x2="260" y2="225"/><line x1="240" y1="245" x2="260" y2="245"/><line x1="240" y1="265" x2="260" y2="265"/><line x1="240" y1="285" x2="260" y2="285"/>
+        <line x1="390" y1="225" x2="410" y2="225"/><line x1="390" y1="245" x2="410" y2="245"/><line x1="390" y1="265" x2="410" y2="265"/><line x1="390" y1="285" x2="410" y2="285"/>
+        <line x1="290" y1="190" x2="290" y2="210"/><line x1="325" y1="190" x2="325" y2="210"/><line x1="360" y1="190" x2="360" y2="210"/>
+        <line x1="290" y1="310" x2="290" y2="330"/><line x1="325" y1="310" x2="325" y2="330"/><line x1="360" y1="310" x2="360" y2="330"/>
+      </g>
+      <text x="325" y="260" fill="#00d4ff" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle" filter="url(#gA)">IC</text>
+      <text x="325" y="278" fill="#0a84ff" font-family="monospace" font-size="8" text-anchor="middle">MCU-2024</text>
+      <!-- MOSFET -->
+      <rect x="80" y="120" width="45" height="60" fill="#0a1628" stroke="#00ff88" stroke-width="2" filter="url(#gB)"/>
+      <g stroke="#00ff88" stroke-width="2"><line x1="80" y1="138" x2="60" y2="138"/><line x1="80" y1="152" x2="60" y2="152"/><line x1="125" y1="150" x2="145" y2="150"/></g>
+      <text x="102" y="157" fill="#00ff88" font-family="monospace" font-size="7" text-anchor="middle">MOS</text>
+      <!-- Capacitor -->
+      <ellipse cx="540" cy="120" rx="18" ry="7" fill="#0a1628" stroke="#0a84ff" stroke-width="2"/>
+      <rect x="522" y="120" width="36" height="36" fill="#061020" stroke="#0a84ff" stroke-width="2"/>
+      <ellipse cx="540" cy="156" rx="18" ry="7" fill="#0a1628" stroke="#0a84ff" stroke-width="2"/>
+      <line x1="540" y1="112" x2="540" y2="90" stroke="#0a84ff" stroke-width="2"/>
+      <!-- LED glow -->
+      <circle cx="580" cy="300" r="14" fill="#c800ff" opacity="0.6" stroke="#ff44cc" stroke-width="2" filter="url(#gB)"/>
+      <circle cx="580" cy="300" r="7" fill="#ff44cc"/>
+      <!-- Track Light shape -->
+      <rect x="100" y="460" width="70" height="25" rx="3" fill="#0a1628" stroke="#ff8c00" stroke-width="2"/>
+      <rect x="110" y="470" width="50" height="8" fill="rgba(255,140,0,0.2)" stroke="#ff8c00" stroke-width="1"/>
+      <g stroke="#ff8c00" stroke-width="1.5" opacity="0.6" stroke-dasharray="3,4">
+        <line x1="115" y1="485" x2="108" y2="505"/><line x1="135" y1="485" x2="135" y2="508"/><line x1="155" y1="485" x2="162" y2="505"/>
+      </g>
+      <!-- Foot light shape -->
+      <rect x="500" y="450" width="20" height="50" rx="3" fill="#0a1628" stroke="#c800ff" stroke-width="2" filter="url(#gA)"/>
+      <circle cx="510" cy="468" r="8" fill="rgba(200,0,255,0.4)" stroke="#c800ff" stroke-width="1.5"/>
+      <g stroke="#c800ff" stroke-width="1" opacity="0.5" stroke-dasharray="2,4">
+        <line x1="518" y1="468" x2="538" y2="458"/><line x1="518" y1="468" x2="538" y2="478"/>
+      </g>
+      <!-- Animated dots -->
+      <circle r="3" fill="#00d4ff" filter="url(#gA)"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#tr1"/></animateMotion></circle>
+      <circle r="3" fill="#ff8c00" filter="url(#gA)"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#tr2"/></animateMotion></circle>
+      <circle r="3" fill="#00ff88" filter="url(#gA)"><animateMotion dur="3.5s" repeatCount="indefinite"><mpath href="#tr3"/></animateMotion></circle>
+      <circle r="2.5" fill="#c800ff" filter="url(#gA)"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#tr4"/></animateMotion></circle>
+      <path id="tr1" d="M100,100 L200,100 L200,200 L400,200 L400,300" fill="none"/>
+      <path id="tr2" d="M400,100 L400,200 L600,200 L600,300 L500,300" fill="none"/>
+      <path id="tr3" d="M100,400 L200,400 L200,300 L300,300 L300,500" fill="none"/>
+      <path id="tr4" d="M600,400 L500,400 L500,500 L300,500 L300,400" fill="none"/>
+      <!-- Corner marks -->
+      <g stroke="#00d4ff" stroke-width="1" opacity="0.4">
+        <path d="M15,10 L5,10 L5,20"/><path d="M685,10 L695,10 L695,20"/>
+        <path d="M15,590 L5,590 L5,580"/><path d="M685,590 L695,590 L695,580"/>
+      </g>
+      <text x="350" y="580" fill="#00d4ff" font-family="monospace" font-size="9" text-anchor="middle" opacity="0.35" letter-spacing="3">ICNOVA ELECTRONICS PVT. LTD.</text>
+    </svg>
+  </div>
+
+  <!-- HERO TEXT -->
+  <div class="hero-content">
+    <div class="hero-badge"><div class="badge-dot"></div>// IMPORT · EXPORT · DISTRIBUTE</div>
+    <h1 class="hero-title">
+      <div class="t1">Global</div>
+      <div class="t2">Electronics</div>
+      <div class="t3">Supplier</div>
+    </h1>
+    <p class="hero-sub">Premium <span>LED lighting</span>, housing lights, track lights, MOSFETs, capacitors &amp; electronic components — imported &amp; distributed pan-India.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="showPage('products')">Browse Products</button>
+      <button class="btn-ghost" onclick="showPage('contact')">Send Enquiry</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hstat-val">500+</div><div class="hstat-lbl">Products</div></div>
+      <div><div class="hstat-val">PAN</div><div class="hstat-lbl">India</div></div>
+      <div><div class="hstat-val">B2B</div><div class="hstat-lbl">Wholesale</div></div>
+    </div>
+  </div>
+  <div class="scroll-ind"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="m-item m-c1">LED Lighting</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c2">Track Lights (ECO/Premium)</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c3">MOSFET Components</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c4">Foot Lights</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c1">Way Lights</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c2">Capacitors</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c3">LED Drivers</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c4">Housing Lights</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c1">IC Chips</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c2">Import · Export</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c3">Ghaziabad · India</span><span class="m-dot">⟡</span>
+    <!-- Repeat -->
+    <span class="m-item m-c1">LED Lighting</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c2">Track Lights (ECO/Premium)</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c3">MOSFET Components</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c4">Foot Lights</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c1">Way Lights</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c2">Capacitors</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c3">LED Drivers</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c4">Housing Lights</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c1">IC Chips</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c2">Import · Export</span><span class="m-dot">⟡</span>
+    <span class="m-item m-c3">Ghaziabad · India</span><span class="m-dot">⟡</span>
+  </div>
+</div>
+
+<!-- PRODUCT CATEGORIES (big cards) -->
+<!-- PRODUCT CATEGORIES -->
+<section style="background:var(--dark2);padding:7rem 5rem">
+  <div class="sec-label">// What We Deal In</div>
+  <div class="sec-title">Our Product <span>Categories</span></div>
+  <div class="divider"></div>
+  <div class="pcat-grid">
+    <div class="pcat-card" onclick="showPage('products');filterProd('led')">
+      <img class="pcat-img" src="images/cat-led.jpg" onerror="this.style.display='none'"/>
+      <div class="pcat-overlay" style="background:linear-gradient(135deg,rgba(0,132,255,0.3),rgba(0,212,255,0.05))"></div>
+      <div class="pcat-content"><div class="pcat-num" style="color:var(--cyan)">// 01</div>
+        <div class="pcat-title">LED Lighting</div>
+        <div class="pcat-sub">Bulbs · Panels · Flood Lights · Street Lights · COB · HighBay</div>
+        <div class="pcat-link" style="color:var(--cyan)">Explore Products →</div></div></div>
+    <div class="pcat-card" onclick="showPage('products');filterProd('track')">
+      <img class="pcat-img" src="images/cat-track.jpg" onerror="this.style.display='none'"/>
+      <div class="pcat-overlay" style="background:linear-gradient(135deg,rgba(255,140,0,0.3),rgba(255,200,0,0.05))"></div>
+      <div class="pcat-content"><div class="pcat-num" style="color:var(--amber)">// 02</div>
+        <div class="pcat-title">Track &amp; Housing Lights</div>
+        <div class="pcat-sub">Reflector Track (ECO/Premium) · Track Mid · Foot Light · Way Light</div>
+        <div class="pcat-link" style="color:var(--amber)">Explore Products →</div></div></div>
+    <div class="pcat-card" onclick="showPage('products');filterProd('components')">
+      <img class="pcat-img" src="images/cat-components.jpg" onerror="this.style.display='none'"/>
+      <div class="pcat-overlay" style="background:linear-gradient(135deg,rgba(0,255,136,0.25),rgba(0,170,85,0.05))"></div>
+      <div class="pcat-content"><div class="pcat-num" style="color:var(--green)">// 03</div>
+        <div class="pcat-title">Electronic Components</div>
+        <div class="pcat-sub">MOSFETs · Capacitors · Transistors · Resistors · IC Chips</div>
+        <div class="pcat-link" style="color:var(--green)">Explore Products →</div></div></div>
+    <div class="pcat-card" onclick="showPage('products');filterProd('drivers')">
+      <img class="pcat-img" src="images/cat-drivers.jpg" onerror="this.style.display='none'"/>
+      <div class="pcat-overlay" style="background:linear-gradient(135deg,rgba(255,215,0,0.25),rgba(200,150,0,0.05))"></div>
+      <div class="pcat-content"><div class="pcat-num" style="color:var(--gold)">// 04</div>
+        <div class="pcat-title">Drivers &amp; Power Supply</div>
+        <div class="pcat-sub">LED Drivers · SMPS · Constant Current · Waterproof Drivers</div>
+        <div class="pcat-link" style="color:var(--gold)">Explore Products →</div></div></div>
+    <div class="pcat-card pcat-dmx-full" onclick="showPage('products');filterProd('dmx')">
+      <img class="pcat-img" src="images/cat-dmx.jpg" onerror="this.style.display='none'"/>
+      <div class="pcat-overlay" style="background:linear-gradient(135deg,rgba(224,64,251,0.35),rgba(100,0,180,0.1))"></div>
+      <div class="pcat-content"><div class="pcat-num" style="color:#e040fb">// 05</div>
+        <div class="pcat-title">DMX Lighting Solutions</div>
+        <div class="pcat-sub">DMX Controllers · Decoders · RGB/RGBW Drivers · Addressable LEDs · ArtNet Systems</div>
+        <div class="pcat-link" style="color:#e040fb">Explore Products →</div></div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section>
+  <div class="sec-label">// Our Services</div>
+  <div class="sec-title">What <span>We Offer</span></div>
+  <div class="divider"></div>
+  <div class="services-grid">
+    <div class="service-card reveal reveal-delay-1"><div class="sc-num">01</div><div class="sc-icon"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px"><defs><radialGradient id="led1" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff9c0"/><stop offset="50%" stop-color="#ffcc00"/><stop offset="100%" stop-color="#ff8800"/></radialGradient><filter id="gledbl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><circle cx="36" cy="30" r="16" fill="url(#led1)" filter="url(#gledbl)" opacity="0.95"/><rect x="30" y="44" width="12" height="5" rx="2" fill="#ffcc00"/><rect x="29" y="50" width="14" height="4" rx="2" fill="#ffa000"/><rect x="31" y="55" width="10" height="3" rx="1.5" fill="#ff8800" opacity="0.8"/><line x1="36" y1="8" x2="36" y2="4" stroke="#ffe066" stroke-width="2.5" stroke-linecap="round"/><line x1="56" y1="18" x2="59" y2="15" stroke="#ffe066" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="18" x2="13" y2="15" stroke="#ffe066" stroke-width="2.5" stroke-linecap="round"/><line x1="62" y1="30" x2="66" y2="30" stroke="#ffe066" stroke-width="2.5" stroke-linecap="round"/><line x1="10" y1="30" x2="6" y2="30" stroke="#ffe066" stroke-width="2.5" stroke-linecap="round"/><circle cx="36" cy="30" r="8" fill="rgba(255,250,200,0.3)"/></svg></div><div class="sc-title">LED Lighting Supply</div><div class="sc-desc">Complete LED range — bulbs, panels, street lights, flood lights, track lights, COB, strip lights. Commercial, industrial & residential solutions.</div></div>
+    <div class="service-card reveal reveal-delay-2"><div class="sc-num">02</div><div class="sc-icon"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px"><defs><radialGradient id="tr1" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#ffe099"/><stop offset="55%" stop-color="#ff8c00"/><stop offset="100%" stop-color="#cc4400"/></radialGradient><linearGradient id="beam1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffcc00" stop-opacity="0.7"/><stop offset="100%" stop-color="#ff8c00" stop-opacity="0.04"/></linearGradient></defs><rect x="22" y="7" width="28" height="16" rx="5" fill="url(#tr1)"/><polygon points="26,23 46,23 58,68 14,68" fill="url(#beam1)"/><circle cx="36" cy="15" r="6" fill="rgba(255,250,200,0.85)"/><circle cx="36" cy="15" r="3.5" fill="#ffffff"/><rect x="28" y="5" width="16" height="4" rx="2" fill="#aa3300"/><rect x="33" y="23" width="6" height="8" fill="#ff9900" opacity="0.5"/></svg></div><div class="sc-title">Housing & Track Lights</div><div class="sc-desc">Reflector track lights (ECO/Premium), mid track lights, foot lights, way lights — premium architectural and décor lighting.</div></div>
+    <div class="service-card reveal reveal-delay-3"><div class="sc-num">03</div><div class="sc-icon"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px"><defs><linearGradient id="cg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00ff88"/><stop offset="100%" stop-color="#00aa55"/></linearGradient></defs><rect x="14" y="14" width="44" height="44" rx="5" fill="#071f12"/><rect x="18" y="18" width="36" height="36" rx="3" fill="#0d3020" stroke="#00cc66" stroke-width="1.2"/><rect x="24" y="24" width="24" height="24" rx="3" fill="url(#cg1)" opacity="0.9"/><rect x="30" y="30" width="12" height="12" rx="2" fill="#003a18"/><circle cx="36" cy="36" r="3" fill="#00ff88" opacity="0.8"/><rect x="11" y="29" width="3" height="4" rx="1" fill="#00ff88"/><rect x="11" y="39" width="3" height="4" rx="1" fill="#00ff88"/><rect x="58" y="29" width="3" height="4" rx="1" fill="#00ff88"/><rect x="58" y="39" width="3" height="4" rx="1" fill="#00ff88"/><rect x="29" y="11" width="4" height="3" rx="1" fill="#00ff88"/><rect x="39" y="11" width="4" height="3" rx="1" fill="#00ff88"/><rect x="29" y="58" width="4" height="3" rx="1" fill="#00ff88"/><rect x="39" y="58" width="4" height="3" rx="1" fill="#00ff88"/><line x1="24" y1="36" x2="18" y2="36" stroke="#00ff88" stroke-width="1.5"/><line x1="48" y1="36" x2="54" y2="36" stroke="#00ff88" stroke-width="1.5"/></svg></div><div class="sc-title">Electronic Components</div><div class="sc-desc">MOSFETs, capacitors, transistors, resistors, IC chips, diodes. Imported from verified global manufacturers.</div></div>
+    <div class="service-card reveal reveal-delay-1"><div class="sc-num">04</div><div class="sc-icon"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px"><defs><radialGradient id="gg1" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#55bbff"/><stop offset="60%" stop-color="#0077dd"/><stop offset="100%" stop-color="#003399"/></radialGradient></defs><circle cx="36" cy="36" r="26" fill="url(#gg1)"/><ellipse cx="36" cy="36" rx="11" ry="26" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><ellipse cx="36" cy="36" rx="22" ry="10" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><line x1="10" y1="36" x2="62" y2="36" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><line x1="36" y1="10" x2="36" y2="62" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="36" cy="36" r="26" fill="none" stroke="rgba(120,210,255,0.5)" stroke-width="1.5"/><polygon points="50,16 62,16 62,28" fill="#88ddff"/><polygon points="22,56 10,56 10,44" fill="#88ddff"/></svg></div><div class="sc-title">Import · Export</div><div class="sc-desc">Direct sourcing from China, Taiwan, South Korea. Pan-India distribution. Competitive pricing with quality assurance.</div></div>
+    <div class="service-card reveal reveal-delay-2"><div class="sc-num">05</div><div class="sc-icon"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px"><defs><linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffe066"/><stop offset="100%" stop-color="#cc8800"/></linearGradient><linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ffd700"/><stop offset="100%" stop-color="#ffaa00"/></linearGradient><linearGradient id="bg3" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffcc44"/><stop offset="100%" stop-color="#996600"/></linearGradient></defs><polygon points="36,8 62,22 62,50 36,64 10,50 10,22" fill="url(#bg3)"/><polygon points="36,8 62,22 36,36 10,22" fill="url(#bg2)"/><polygon points="36,36 62,22 62,50 36,64" fill="url(#bg1)" opacity="0.7"/><line x1="36" y1="36" x2="36" y2="64" stroke="#996600" stroke-width="1.5"/><line x1="36" y1="8" x2="36" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/></svg></div><div class="sc-title">Bulk B2B Orders</div><div class="sc-desc">Wholesale supply for manufacturers, contractors, distributors. Custom packaging, OEM sourcing, flexible payment terms.</div></div>
+    <div class="service-card reveal reveal-delay-3"><div class="sc-num">06</div><div class="sc-icon"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px"><defs><linearGradient id="tg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#cc44ff"/><stop offset="100%" stop-color="#7700cc"/></linearGradient></defs><rect x="4" y="22" width="42" height="28" rx="4" fill="url(#tg1)"/><rect x="46" y="30" width="22" height="20" rx="3" fill="#8822dd"/><rect x="48" y="32" width="16" height="11" rx="2" fill="#88ccff" opacity="0.65"/><rect x="4" y="22" width="20" height="13" rx="2" fill="rgba(180,0,255,0.35)"/><circle cx="16" cy="53" r="7" fill="#1a0a2e" stroke="#c800ff" stroke-width="2.5"/><circle cx="16" cy="53" r="4" fill="#332244"/><circle cx="16" cy="53" r="2" fill="#aa88cc"/><circle cx="57" cy="53" r="7" fill="#1a0a2e" stroke="#c800ff" stroke-width="2.5"/><circle cx="57" cy="53" r="4" fill="#332244"/><circle cx="57" cy="53" r="2" fill="#aa88cc"/><rect x="2" y="48" width="68" height="5" rx="2" fill="#440088" opacity="0.5"/><rect x="6" y="30" width="8" height="6" rx="1" fill="#ffcc00" opacity="0.85"/><rect x="6" y="38" width="8" height="6" rx="1" fill="rgba(255,80,80,0.8)"/></svg></div><div class="sc-title">Pan-India Delivery</div><div class="sc-desc">Fast, reliable shipping across all Indian states. Secure packaging, GST invoicing, real-time tracking.</div></div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section style="background:var(--dark2)">
+  <div class="sec-label">// Why ICNova</div>
+  <div class="sec-title">Trusted by <span>Businesses</span></div>
+  <div class="divider"></div>
+  <div class="why-grid">
+    <div class="why-card wc-blue reveal reveal-scale reveal-delay-1"><div class="why-icon"><svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" width="48" height="48"><defs><linearGradient id="wi" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#44ccff"/><stop offset="100%" stop-color="#0066ff"/></linearGradient></defs><rect x="8" y="16" width="40" height="28" rx="5" fill="url(#wi)"/><polygon points="28,4 40,16 16,16" fill="#0044cc"/><rect x="20" y="28" width="16" height="10" rx="2" fill="#002266"/><line x1="28" y1="4" x2="28" y2="28" stroke="#88ddff" stroke-width="1.5" stroke-dasharray="4,3"/></svg></div><div class="why-title">Direct Import</div><div class="why-desc">Sourced directly from global manufacturers. No middlemen — lowest prices guaranteed.</div></div>
+    <div class="why-card wc-amber reveal reveal-scale reveal-delay-2"><div class="why-icon"><svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" width="48" height="48"><defs><linearGradient id="wq" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffdd44"/><stop offset="100%" stop-color="#ff8800"/></linearGradient></defs><polygon points="28,4 34,20 52,20 38,30 44,48 28,38 12,48 18,30 4,20 22,20" fill="url(#wq)"/><polyline points="18,28 25,35 38,21" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="why-title">Quality Assured</div><div class="why-desc">Every product tested and verified. Authentic components from certified global suppliers.</div></div>
+    <div class="why-card wc-green reveal reveal-scale reveal-delay-3"><div class="why-icon"><svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" width="48" height="48"><defs><linearGradient id="wp" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#44ff99"/><stop offset="100%" stop-color="#00aa55"/></linearGradient></defs><circle cx="28" cy="28" r="24" fill="url(#wp)"/><text x="28" y="21" text-anchor="middle" font-size="14" font-weight="900" fill="white" font-family="Arial">₹</text><line x1="28" y1="10" x2="28" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M20,20 Q20,14 28,14 Q36,14 36,20 Q36,26 28,26 Q20,26 20,32 Q20,38 28,38 Q36,38 36,32" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg></div><div class="why-title">Best Pricing</div><div class="why-desc">Competitive market rates for bulk orders. Flexible pricing for long-term partners.</div></div>
+    <div class="why-card wc-purple reveal reveal-scale reveal-delay-4"><div class="why-icon"><svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" width="48" height="48"><defs><linearGradient id="ws" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ee44ff"/><stop offset="100%" stop-color="#8800cc"/></linearGradient></defs><circle cx="28" cy="28" r="24" fill="url(#ws)"/><path d="M16,28 C16,21 21,16 28,16 C35,16 40,21 40,28" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/><rect x="13" y="27" width="6" height="10" rx="3" fill="white"/><rect x="37" y="27" width="6" height="10" rx="3" fill="white"/><line x1="40" y1="37" x2="40" y2="41" stroke="white" stroke-width="2.5"/><path d="M34,41 C34,41 36,44 28,44 C24,44 22,42 22,42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="why-title">Expert Support</div><div class="why-desc">Technical team available 6 days/week. Free consultation for product selection.</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div><div class="fn">IC<span>Nova</span></div><div class="ft">Electronics Pvt. Ltd.</div><div class="fd">Import-export of premium LED lighting, track lights, housing lights, and electronic components. Ghaziabad, UP.</div></div>
+    <div class="footer-col"><h4>Navigate</h4><ul><li onclick="showPage('home')">Home</li><li onclick="showPage('products')">Products</li><li onclick="showPage('about')">About Us</li><li onclick="showPage('contact')">Contact</li></ul></div>
+    <div class="footer-col"><h4>Products</h4><ul><li onclick="showPage('products');filterProd('led')">LED Lighting</li><li onclick="showPage('products');filterProd('track')">Track / Housing</li><li onclick="showPage('products');filterProd('components')">Components</li><li onclick="showPage('products');filterProd('drivers')">Drivers</li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li>+91 6395107577</li><li>icnovaelectronics@gmail.com</li><li>Plot no.56, Rajenclave</li><li>Chhaprola, Ghaziabad 201009</li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 ICNova Electronics Pvt. Ltd. All rights reserved.</span>
+    <div class="socials"><a class="soc-link fb" href="https://facebook.com/icnovaelectronics" target="_blank" title="Facebook"><svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a class="soc-link ig" href="https://instagram.com/icnovaelectronics" target="_blank" title="Instagram"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a class="soc-link wa" href="https://wa.me/916395107577" target="_blank" title="WhatsApp"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a><a class="soc-link yt" href="https://youtube.com" target="_blank" title="YouTube"><svg viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a class="soc-link li" href="https://linkedin.com/company/icnovaelectronics" target="_blank" title="LinkedIn"><svg viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></div></div>
+  </div>
+</footer>
+</div><!-- /HOME -->
+
+
+<!-- ══════════════════════ PRODUCTS ══════════════════════ -->
+<div class="page" id="page-products">
+<div class="prod-page-hero">
+  <div style="position:relative;z-index:2">
+    <div class="sec-label">// Product Catalog</div>
+    <div class="sec-title">Our <span>Complete</span> Range</div>
+    <p style="font-size:0.95rem;color:var(--muted);max-width:520px;line-height:1.7;margin-top:1rem">LED lighting, track lights, housing lights, electronic components — imported from verified global manufacturers.</p>
+  </div>
+</div>
+
+<section>
+  <!-- FILTERS -->
+  <div class="prod-filter" id="prodFilter">
+    <button class="filter-btn active" id="fb-all" onclick="filterProd('all')">⊞ All Products</button>
+    <button class="filter-btn" id="fb-led" onclick="filterProd('led')">💡 LED Lighting</button>
+    <button class="filter-btn trk" id="fb-track" onclick="filterProd('track')">🔆 Track &amp; Housing</button>
+    <button class="filter-btn out" id="fb-outdoor" onclick="filterProd('outdoor')">🌙 Outdoor / Décor</button>
+    <button class="filter-btn cmp" id="fb-components" onclick="filterProd('components')">⚡ Components</button>
+    <button class="filter-btn drv" id="fb-drivers" onclick="filterProd('drivers')">🔌 Drivers</button>
+  </div>
+
+  <!-- PRODUCT GRID -->
+  <div class="prod-grid" id="prodGrid">
+
+    <!-- ═══ LED LIGHTING (Blue) ═══ -->
+    <div class="prod-card c-led" data-cat="led">
+      <div class="prod-img-wrap">
+        <img src="images/led-bulb.jpg" alt="LED Bulb" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#030b18,#0a1628)">💡</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,212,255,0.25),transparent)"></div>
+        <div class="prod-badge led">LED</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--led-c)">// LED Bulb Series</div>
+        <div class="prod-name">LED Bulb — Full Range (3W–25W)</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-led">B22 / E27</span>
+          <span class="spec-tag s-led">Cool / Warm White</span>
+          <span class="spec-tag s-led">50,000hr Life</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-led" data-cat="led">
+      <div class="prod-img-wrap">
+        <img src="images/led-panel.jpg" alt="LED Panel" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#030b18,#0a1628)">🔲</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,212,255,0.2),transparent)"></div>
+        <div class="prod-badge led">LED</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--led-c)">// Panel Light Series</div>
+        <div class="prod-name">LED Panel Light (12W–60W)</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-led">Recessed</span>
+          <span class="spec-tag s-led">CCT 3000K–6500K</span>
+          <span class="spec-tag s-led">High Lumen</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-led" data-cat="led">
+      <div class="prod-img-wrap">
+        <img src="images/led-cob.jpg" alt="LED COB Downlight" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#030b18,#0a1628)">🔆</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,212,255,0.2),transparent)"></div>
+        <div class="prod-badge led">COB</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--led-c)">// COB Downlight</div>
+        <div class="prod-name">LED COB Downlight (7W–35W)</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-led">High CRI &gt;90</span>
+          <span class="spec-tag s-led">Slim Body</span>
+          <span class="spec-tag s-led">Dimmable</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-led" data-cat="led">
+      <div class="prod-img-wrap">
+        <img src="images/led-tube.jpg" alt="LED Tube" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#030b18,#0a1628)">📏</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,212,255,0.2),transparent)"></div>
+        <div class="prod-badge led">LED</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--led-c)">// Tube / Batten</div>
+        <div class="prod-name">LED Tube / Batten (10W–40W)</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-led">T5 / T8</span>
+          <span class="spec-tag s-led">2ft / 4ft</span>
+          <span class="spec-tag s-led">Nano Cover</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-led" data-cat="led">
+      <div class="prod-img-wrap">
+        <img src="images/led-highbay.jpg" alt="LED HighBay" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#030b18,#0a1628)">🏭</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,212,255,0.2),transparent)"></div>
+        <div class="prod-badge led">Industrial</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--led-c)">// High Bay Series</div>
+        <div class="prod-name">LED High Bay Light (100W–400W)</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-led">IP65</span>
+          <span class="spec-tag s-led">160 lm/W</span>
+          <span class="spec-tag s-led">Industrial</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ TRACK & HOUSING (Orange/Amber) ═══ -->
+    <div class="prod-card c-track" data-cat="track">
+      <div class="prod-img-wrap">
+        <img src="images/track-eco.jpg" alt="Reflector Track Light ECO" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#1a0a00,#201000)">🔦</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(255,140,0,0.25),transparent)"></div>
+        <div class="prod-badge trk">ECO</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--trk-c)">// Track Light Series</div>
+        <div class="prod-name">Reflector Track Light — ECO</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-trk">Energy Efficient</span>
+          <span class="spec-tag s-trk">360° Rotate</span>
+          <span class="spec-tag s-trk">Budget Range</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-track" data-cat="track">
+      <div class="prod-img-wrap">
+        <img src="images/track-premium.jpg" alt="Reflector Track Light Premium" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#1a0a00,#201000)">✨</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(255,140,0,0.3),transparent)"></div>
+        <div class="prod-badge trk">Premium</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--trk-c)">// Track Light Series</div>
+        <div class="prod-name">Reflector Track Light — Premium</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-trk">High CRI &gt;95</span>
+          <span class="spec-tag s-trk">Anti-Glare</span>
+          <span class="spec-tag s-trk">Dimmable</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-track" data-cat="track">
+      <div class="prod-img-wrap">
+        <img src="images/track-mid.jpg" alt="Track Light Mid" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#1a0a00,#201000)">🎯</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(255,140,0,0.25),transparent)"></div>
+        <div class="prod-badge trk">Mid</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--trk-c)">// Track Light Series</div>
+        <div class="prod-name">Track Light — Mid Range</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-trk">12W / 18W / 24W</span>
+          <span class="spec-tag s-trk">3000K / 4000K</span>
+          <span class="spec-tag s-trk">Commercial</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ OUTDOOR / DÉCOR (Purple) ═══ -->
+    <div class="prod-card c-outdoor" data-cat="outdoor">
+      <div class="prod-img-wrap">
+        <img src="images/foot-light.jpg" alt="Foot Light" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#0f0018,#18002a)">🔆</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(200,0,255,0.3),transparent)"></div>
+        <div class="prod-badge out">Foot</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--out-c)">// Décor Lighting</div>
+        <div class="prod-name">Foot Light (Wall / Step)</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-out">IP54</span>
+          <span class="spec-tag s-out">3W / 5W</span>
+          <span class="spec-tag s-out">Indoor / Outdoor</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-outdoor" data-cat="outdoor">
+      <div class="prod-img-wrap">
+        <img src="images/way-light.jpg" alt="Way Light" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#0f0018,#18002a)">🌙</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(200,0,255,0.3),transparent)"></div>
+        <div class="prod-badge out">Way</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--out-c)">// Pathway Lighting</div>
+        <div class="prod-name">Way Light (Garden / Pathway)</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-out">IP65</span>
+          <span class="spec-tag s-out">Solar Option</span>
+          <span class="spec-tag s-out">Landscape</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-led" data-cat="led">
+      <div class="prod-img-wrap">
+        <img src="images/led-flood.jpg" alt="LED Flood Light" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#030b18,#0a1628)">🌟</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,212,255,0.2),transparent)"></div>
+        <div class="prod-badge led">Flood</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--led-c)">// Flood Light Series</div>
+        <div class="prod-name">LED Flood Light (50W–500W)</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-led">IP65</span>
+          <span class="spec-tag s-led">Outdoor</span>
+          <span class="spec-tag s-led">Stadium Grade</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-led" data-cat="led">
+      <div class="prod-img-wrap">
+        <img src="images/led-street.jpg" alt="LED Street Light" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#030b18,#0a1628)">🛣️</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,212,255,0.2),transparent)"></div>
+        <div class="prod-badge led">Street</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--led-c)">// Street Light Series</div>
+        <div class="prod-name">LED Street Light (30W–200W)</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-led">IP66</span>
+          <span class="spec-tag s-led">High Lumen</span>
+          <span class="spec-tag s-led">Solar Option</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ COMPONENTS (Green) ═══ -->
+    <div class="prod-card c-components" data-cat="components">
+      <div class="prod-img-wrap">
+        <img src="images/mosfet.jpg" alt="MOSFET" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#001a0a,#002810)">⚡</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,255,136,0.25),transparent)"></div>
+        <div class="prod-badge cmp">MOSFET</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--cmp-c)">// Power Semiconductor</div>
+        <div class="prod-name">MOSFET — N/P Channel (All Types)</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-cmp">IRF Series</span>
+          <span class="spec-tag s-cmp">TO-220 / TO-247</span>
+          <span class="spec-tag s-cmp">SMD Types</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-components" data-cat="components">
+      <div class="prod-img-wrap">
+        <img src="images/capacitor.jpg" alt="Capacitor" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#001a0a,#002810)">🔋</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,255,136,0.2),transparent)"></div>
+        <div class="prod-badge cmp">Capacitor</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--cmp-c)">// Passive Component</div>
+        <div class="prod-name">Electrolytic Capacitors (All Ranges)</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-cmp">1µF – 10000µF</span>
+          <span class="spec-tag s-cmp">16V – 450V</span>
+          <span class="spec-tag s-cmp">SMD / THT</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-components" data-cat="components">
+      <div class="prod-img-wrap">
+        <img src="images/ic-chip.jpg" alt="IC Chip" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#001a0a,#002810)">🖥️</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,255,136,0.2),transparent)"></div>
+        <div class="prod-badge cmp">IC</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--cmp-c)">// Integrated Circuit</div>
+        <div class="prod-name">IC Chips — Logic, Analog, MCU</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-cmp">DIP / SOIC</span>
+          <span class="spec-tag s-cmp">555 Timer</span>
+          <span class="spec-tag s-cmp">Op-Amp</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-components" data-cat="components">
+      <div class="prod-img-wrap">
+        <img src="images/transistor.jpg" alt="Transistor" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#001a0a,#002810)">🔩</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,255,136,0.2),transparent)"></div>
+        <div class="prod-badge cmp">BJT</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--cmp-c)">// Semiconductor</div>
+        <div class="prod-name">Transistors — NPN, PNP, Darlington</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-cmp">BC547/BC557</span>
+          <span class="spec-tag s-cmp">TIP31/TIP32</span>
+          <span class="spec-tag s-cmp">TO-92/TO-220</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-components" data-cat="components">
+      <div class="prod-img-wrap">
+        <img src="images/resistor.jpg" alt="Resistor" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#001a0a,#002810)">〰️</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,255,136,0.2),transparent)"></div>
+        <div class="prod-badge cmp">Resistor</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--cmp-c)">// Passive Component</div>
+        <div class="prod-name">Resistors — Carbon, Metal Film, SMD</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-cmp">0.1Ω–10MΩ</span>
+          <span class="spec-tag s-cmp">1/8W–5W</span>
+          <span class="spec-tag s-cmp">1% Tol.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ DRIVERS (Gold) ═══ -->
+    <div class="prod-card c-drivers" data-cat="drivers">
+      <div class="prod-img-wrap">
+        <img src="images/led-driver.jpg" alt="LED Driver" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#1a1400,#252000)">🔌</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(255,215,0,0.25),transparent)"></div>
+        <div class="prod-badge drv">Driver</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--drv-c)">// LED Driver</div>
+        <div class="prod-name">LED Driver / SMPS (3W–300W)</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-drv">Const. Current</span>
+          <span class="spec-tag s-drv">PF &gt; 0.9</span>
+          <span class="spec-tag s-drv">IP67</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card c-drivers" data-cat="drivers">
+      <div class="prod-img-wrap">
+        <img src="images/smps.jpg" alt="SMPS" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#1a1400,#252000)">⚙️</div>
+        <div class="prod-img-glow" style="background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(255,215,0,0.2),transparent)"></div>
+        <div class="prod-badge drv">SMPS</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="color:var(--drv-c)">// Power Supply</div>
+        <div class="prod-name">SMPS Power Supply (12V/24V/48V)</div>
+        <div class="prod-specs">
+          <span class="spec-tag s-drv">12V/24V/48V</span>
+          <span class="spec-tag s-drv">5A–50A</span>
+          <span class="spec-tag s-drv">DIN Rail</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DMX PRODUCTS -->
+    <div class="prod-card c-dmx" data-cat="dmx">
+      <div class="prod-img-wrap"><img src="images/dmx-controller.jpg" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#1a0a2e,#2d0050)">🎛️</div>
+        <div class="prod-badge dmx">DMX</div></div>
+      <div class="prod-info"><div class="prod-cat" style="color:#e040fb">// DMX Controller</div>
+        <div class="prod-name">DMX 512 Controller (512 Channels)</div>
+        <div class="prod-specs"><span class="spec-tag s-dmx">512 CH</span><span class="spec-tag s-dmx">LCD Display</span><span class="spec-tag s-dmx">Stage/Arch</span></div></div></div>
+    <div class="prod-card c-dmx" data-cat="dmx">
+      <div class="prod-img-wrap"><img src="images/dmx-decoder.jpg" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#1a0a2e,#2d0050)">📡</div>
+        <div class="prod-badge dmx">Decoder</div></div>
+      <div class="prod-info"><div class="prod-cat" style="color:#e040fb">// DMX Decoder</div>
+        <div class="prod-name">DMX Decoder — RGB/RGBW (12–24V)</div>
+        <div class="prod-specs"><span class="spec-tag s-dmx">3–4 Channel</span><span class="spec-tag s-dmx">PWM Output</span><span class="spec-tag s-dmx">512 Protocol</span></div></div></div>
+    <div class="prod-card c-dmx" data-cat="dmx">
+      <div class="prod-img-wrap"><img src="images/dmx-rgb-driver.jpg" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#1a0a2e,#2d0050)">🌈</div>
+        <div class="prod-badge dmx">RGB</div></div>
+      <div class="prod-info"><div class="prod-cat" style="color:#e040fb">// RGB LED Driver</div>
+        <div class="prod-name">RGB/RGBW LED Driver (DMX Compatible)</div>
+        <div class="prod-specs"><span class="spec-tag s-dmx">12V/24V</span><span class="spec-tag s-dmx">Constant Voltage</span><span class="spec-tag s-dmx">DMX/PWM</span></div></div></div>
+    <div class="prod-card c-dmx" data-cat="dmx">
+      <div class="prod-img-wrap"><img src="images/dmx-addressable.jpg" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#1a0a2e,#2d0050)">✨</div>
+        <div class="prod-badge dmx">SPI</div></div>
+      <div class="prod-info"><div class="prod-cat" style="color:#e040fb">// Addressable LED</div>
+        <div class="prod-name">Addressable LED Strip (WS2812B/SK6812)</div>
+        <div class="prod-specs"><span class="spec-tag s-dmx">Individual Pixel</span><span class="spec-tag s-dmx">5V/12V</span><span class="spec-tag s-dmx">SPI/DMX</span></div></div></div>
+    <div class="prod-card c-dmx" data-cat="dmx">
+      <div class="prod-img-wrap"><img src="images/dmx-artnet.jpg" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#1a0a2e,#2d0050)">🔗</div>
+        <div class="prod-badge dmx">ArtNet</div></div>
+      <div class="prod-info"><div class="prod-cat" style="color:#e040fb">// Network Controller</div>
+        <div class="prod-name">ArtNet/sACN to DMX Converter</div>
+        <div class="prod-specs"><span class="spec-tag s-dmx">Ethernet Input</span><span class="spec-tag s-dmx">2 Universe</span><span class="spec-tag s-dmx">Stage/Arch</span></div></div></div>
+    <div class="prod-card c-dmx" data-cat="dmx">
+      <div class="prod-img-wrap"><img src="images/dmx-solution.jpg" onerror="this.style.display='none'"/>
+        <div class="prod-img-fallback" style="background:linear-gradient(135deg,#1a0a2e,#2d0050)">🏗️</div>
+        <div class="prod-badge dmx">Solution</div></div>
+      <div class="prod-info"><div class="prod-cat" style="color:#e040fb">// Complete Solution</div>
+        <div class="prod-name">DMX Complete Lighting Solution (Turnkey)</div>
+        <div class="prod-specs"><span class="spec-tag s-dmx">Design+Supply</span><span class="spec-tag s-dmx">Hotels/Malls</span><span class="spec-tag s-dmx">Free Consult</span></div></div></div>
+  </div><!-- /prod-grid -->
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="fn">IC<span>Nova</span></div><div class="ft">Electronics Pvt. Ltd.</div><div class="fd">LED lighting, track lights, housing lights, and electronic components. Ghaziabad, UP — 201009.</div></div>
+    <div class="footer-col"><h4>Navigate</h4><ul><li onclick="showPage('home')">Home</li><li onclick="showPage('products')">Products</li><li onclick="showPage('about')">About</li><li onclick="showPage('contact')">Contact</li></ul></div>
+    <div class="footer-col"><h4>Products</h4><ul><li onclick="filterProd('led')">LED Lighting</li><li onclick="filterProd('track')">Track Lights</li><li onclick="filterProd('outdoor')">Foot / Way Light</li><li onclick="filterProd('components')">Components</li></ul></div>
+    <div class="footer-col"><h4>Reach Us</h4><ul><li>+91 6395107577</li><li>icnovaelectronics@gmail.com</li><li>www.icnovaelectronics.com</li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ICNova Electronics Pvt. Ltd.</span></div>
+</footer>
+</div><!-- /PRODUCTS -->
+
+
+<!-- ══════════════════════ ABOUT ══════════════════════ -->
+<div class="page" id="page-about">
+<section style="padding:10rem 5rem 6rem;background:var(--dark2);position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 70% 50%,rgba(0,132,255,0.07),rgba(200,0,255,0.04),transparent 65%)"></div>
+  <div class="about-split" style="position:relative;z-index:2">
+    <div>
+      <div class="sec-label">// Who We Are</div>
+      <div class="sec-title">ICNova <span>Electronics</span></div>
+      <div class="divider"></div>
+      <p style="font-size:0.95rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem">ICNova Electronics Pvt. Ltd. is a Ghaziabad-based import-export company specialising in premium LED lighting systems, architectural track lights, housing lights, and precision electronic components.</p>
+      <p style="font-size:0.95rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem">We bridge global electronics manufacturers with Indian businesses. Our catalogue spans LED bulbs, panels, reflector track lights (ECO &amp; Premium), foot lights, way lights, and every key component — MOSFETs, capacitors, IC chips, transistors, resistors, and LED drivers.</p>
+      <p style="font-size:0.95rem;color:var(--muted);line-height:1.8">We source directly from verified manufacturers in China, Taiwan, and South Korea — ensuring authenticity, competitive pricing, and consistent quality for all our B2B clients across India.</p>
+      <div class="facts-grid">
+        <div class="fact-card fc1"><div class="fc-num">500+</div><div class="fc-lbl">Product SKUs</div></div>
+        <div class="fact-card fc2"><div class="fc-num">PAN</div><div class="fc-lbl">India Reach</div></div>
+        <div class="fact-card fc3"><div class="fc-num">B2B</div><div class="fc-lbl">Wholesale Focus</div></div>
+        <div class="fact-card fc4"><div class="fc-num">100%</div><div class="fc-lbl">Genuine Products</div></div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-logo-box"><img src="images/company-logo.png" alt="ICNova" style="max-width:88%;max-height:290px;object-fit:contain;position:relative;z-index:2" onerror="this.style.display='none';document.getElementById('alf').style.display='flex'"/><div id="alf" style="display:flex;flex-direction:column;align-items:center;gap:1.5rem;z-index:2;position:relative"><div style="width:95px;height:95px;background:linear-gradient(135deg,#0a84ff,#00d4ff);display:flex;align-items:center;justify-content:center;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);font-size:2.4rem;font-weight:900;color:#030b18;font-family:Rajdhani,sans-serif;box-shadow:0 0 40px rgba(0,212,255,0.35)">IC</div><div style="text-align:center"><div style="font-family:Rajdhani,sans-serif;font-size:3.2rem;font-weight:700;letter-spacing:0.1em;color:#fff">IC<span style="color:#00d4ff">Nova</span></div><div style="font-size:0.75rem;letter-spacing:0.4em;color:#8899aa;text-transform:uppercase;margin-top:0.4rem">Electronics Pvt. Ltd.</div><div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,#00d4ff,transparent);margin:1rem auto"></div><div style="font-size:0.65rem;color:#556677;letter-spacing:0.2em">IMPORT · EXPORT · DISTRIBUTE</div></div></div><div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(0,132,255,0.07),transparent);pointer-events:none"></div></div>
+      <div class="about-year-badge">
+        <div class="aby-num">PVT</div>
+        <div class="aby-lbl">LTD</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECTORS -->
+<section style="background:linear-gradient(150deg,#0d0d1e 0%,#110e22 50%,#0b0b18 100%);padding:7rem 5rem">
+  <div class="sec-label">// Leadership</div>
+  <div class="sec-title">Our <span>Directors</span></div>
+  <div class="divider"></div>
+  <div class="dir-row1">
+    <div class="dir-person"><div class="dir-circle-wrap"><div class="dir-circle-inner"><img src="images/director-sk-sharma.jpg" onerror="this.style.display='none'"/><div class="dir-circle-fallback">👨‍💼</div></div></div><div class="dir-p-name">Mr. S. K. Sharma</div><div class="dir-p-role">// Director</div><div class="dir-p-phone"><a href="tel:+916395107577">+91 6395107577</a></div><div class="dir-p-email">icnovaelectronics@gmail.com</div></div>
+    <div class="dir-person"><div class="dir-circle-wrap"><div class="dir-circle-inner"><img src="images/director-sandeep.jpg" onerror="this.style.display='none'"/><div class="dir-circle-fallback">👨‍💻</div></div></div><div class="dir-p-name">Sandeep Sharma</div><div class="dir-p-role">// Director &amp; CEO</div><div class="dir-p-phone"><a href="tel:+916395107577">+91 6395107577</a></div><div class="dir-p-email">icnovaelectronics@gmail.com</div></div>
+  </div>
+  <div class="dir-row2">
+    <div class="dir-person"><div class="dir-circle-wrap"><div class="dir-circle-inner"><img src="images/director-3.jpg" onerror="this.style.display='none'"/><div class="dir-circle-fallback">👤</div></div></div><div class="dir-p-name">Name Here</div><div class="dir-p-role">// Director</div><div class="dir-p-phone"><a href="tel:+91XXXXXXXXXX">+91 XXXXX XXXXX</a></div><div class="dir-p-email">icnovaelectronics@gmail.com</div></div>
+    <div class="dir-person"><div class="dir-circle-wrap"><div class="dir-circle-inner"><img src="images/director-4.jpg" onerror="this.style.display='none'"/><div class="dir-circle-fallback">👤</div></div></div><div class="dir-p-name">Name Here</div><div class="dir-p-role">// Director</div><div class="dir-p-phone"><a href="tel:+91XXXXXXXXXX">+91 XXXXX XXXXX</a></div><div class="dir-p-email">icnovaelectronics@gmail.com</div></div>
+    <div class="dir-person"><div class="dir-circle-wrap"><div class="dir-circle-inner"><img src="images/director-5.jpg" onerror="this.style.display='none'"/><div class="dir-circle-fallback">👤</div></div></div><div class="dir-p-name">Name Here</div><div class="dir-p-role">// Director</div><div class="dir-p-phone"><a href="tel:+91XXXXXXXXXX">+91 XXXXX XXXXX</a></div><div class="dir-p-email">icnovaelectronics@gmail.com</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="fn">IC<span>Nova</span></div><div class="ft">Electronics Pvt. Ltd.</div><div class="fd">Import-export specialists. LED lighting, track lights, and electronic components. Based in Ghaziabad, UP.</div></div>
+    <div class="footer-col"><h4>Navigate</h4><ul><li onclick="showPage('home')">Home</li><li onclick="showPage('products')">Products</li><li onclick="showPage('about')">About</li><li onclick="showPage('contact')">Contact</li></ul></div>
+    <div class="footer-col"><h4>Brands</h4><ul><li>LED Lighting</li><li>Track / Housing</li><li>Electronic Components</li><li>Drivers</li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li>+91 6395107577</li><li>icnovaelectronics@gmail.com</li><li>www.icnovaelectronics.com</li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ICNova Electronics Pvt. Ltd. All rights reserved.</span></div>
+</footer>
+</div><!-- /ABOUT -->
+
+
+<!-- ══════════════════════ CONTACT ══════════════════════ -->
+<div class="page" id="page-contact">
+<div class="contact-layout">
+
+  <!-- LEFT INFO -->
+  <div class="contact-left">
+    <div style="position:absolute;inset:0;opacity:0.08">
+      <svg width="100%" height="100%" viewBox="0 0 400 700"><g stroke="#00d4ff" stroke-width="0.7"><line x1="50" y1="0" x2="50" y2="700"/><line x1="150" y1="0" x2="150" y2="700"/><line x1="250" y1="0" x2="250" y2="700"/><line x1="350" y1="0" x2="350" y2="700"/><line x1="0" y1="80" x2="400" y2="80"/><line x1="0" y1="200" x2="400" y2="200"/><line x1="0" y1="350" x2="400" y2="350"/><line x1="0" y1="500" x2="400" y2="500"/><line x1="0" y1="620" x2="400" y2="620"/></g><circle cx="50" cy="80" r="3" fill="#00d4ff"/><circle cx="250" cy="200" r="3" fill="#ff8c00"/><circle cx="150" cy="350" r="3" fill="#00ff88"/><circle cx="350" cy="500" r="3" fill="#c800ff"/></svg>
+    </div>
+    <div style="position:relative;z-index:2">
+      <div class="sec-label">// Get In Touch</div>
+      <div class="sec-title" style="font-size:clamp(2rem,3.5vw,3rem)">Let's Do <span>Business</span></div>
+      <div class="divider"></div>
+      <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:3rem">Looking for LED lighting, track lights, foot lights, MOSFETs, capacitors or any electronic component in bulk? Our team responds within 24 hours.</p>
+      <div class="cd-wrap"><div class="cd-icon">📞</div><div class="cd-text"><h4>Call Us</h4><p><a href="tel:+916395107577">+91 6395107577</a></p></div></div>
+      <div class="cd-wrap"><div class="cd-icon">✉️</div><div class="cd-text"><h4>Email Us</h4><p>icnovaelectronics@gmail.com</p></div></div>
+      <div class="cd-wrap"><div class="cd-icon">🌐</div><div class="cd-text"><h4>Website</h4><p><a href="http://www.icnovaelectronics.com" target="_blank">www.icnovaelectronics.com</a></p></div></div>
+      <div class="cd-wrap"><div class="cd-icon">📍</div><div class="cd-text"><h4>Address</h4><p>Plot no.56, Rajenclave,<br>Chhaprola, Ghaziabad<br>Uttar Pradesh — 201009</p></div></div>
+      <div style="margin-top:3rem;padding:1.8rem;background:var(--surface);border-left:3px solid var(--amber)">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:0.25em;color:var(--amber);margin-bottom:0.6rem">// B2B ENQUIRIES WELCOME</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.6">Bulk orders, OEM supply, custom sourcing. Flexible terms for regular business partners. GST invoices provided.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT FORM -->
+  <div class="contact-right">
+    <div class="sec-label">// Send Enquiry</div>
+    <div class="sec-title" style="font-size:2.2rem;margin-bottom:2.5rem">What do you <span>need?</span></div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" id="f-name" placeholder="Your Name"/>
+      </div>
+      <div class="form-group">
+        <label>Company Name</label>
+        <input type="text" id="f-company" placeholder="Your Company"/>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Phone *</label>
+        <input type="tel" id="f-phone" placeholder="+91 XXXXX XXXXX"/>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="f-email" placeholder="your@email.com"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Product Interest *</label>
+      <select id="f-cat">
+        <option value="">— Select Product Category —</option>
+        <optgroup label="💡 LED Lighting">
+          <option>LED Bulbs (3W–25W)</option>
+          <option>LED Panel Lights</option>
+          <option>LED COB Downlights</option>
+          <option>LED Street Lights</option>
+          <option>LED Flood Lights</option>
+          <option>LED High Bay Lights</option>
+          <option>LED Tube / Batten Lights</option>
+        </optgroup>
+        <optgroup label="🔆 Track & Housing Lights">
+          <option>Reflector Track Light — ECO</option>
+          <option>Reflector Track Light — Premium</option>
+          <option>Track Light — Mid Range</option>
+          <option>Foot Light (Wall / Step)</option>
+          <option>Way Light (Garden / Pathway)</option>
+        </optgroup>
+        <optgroup label="⚡ Electronic Components">
+          <option>MOSFETs (N/P Channel)</option>
+          <option>Capacitors (Electrolytic / Ceramic)</option>
+          <option>Transistors (NPN / PNP)</option>
+          <option>Resistors</option>
+          <option>IC Chips / Logic ICs</option>
+          <option>Diodes / Zener / Schottky</option>
+        </optgroup>
+        <optgroup label="🔌 Drivers & Power">
+          <option>LED Drivers (3W–300W)</option>
+          <option>SMPS Power Supply</option>
+        </optgroup>
+        <option>Multiple Products / General Enquiry</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Quantity Required</label>
+        <input type="text" id="f-qty" placeholder="e.g. 500 pcs / 10 cartons"/>
+      </div>
+      <div class="form-group">
+        <label>City / State</label>
+        <input type="text" id="f-city" placeholder="Delivery Location"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Message / Specifications</label>
+      <textarea id="f-msg" placeholder="Describe your requirement — part numbers, wattage, specifications, delivery timeline..."></textarea>
+    </div>
+
+    <button class="btn-primary" id="submitBtn" style="width:100%;padding:1.3rem;font-size:1rem;letter-spacing:0.2em" onclick="submitForm()">
+      SEND ENQUIRY →
+    </button>
+    <p class="form-note" style="margin-top:0.8rem">* We respond within 24 hours. Your data is never shared.</p>
+
+    <!-- STATUS MESSAGES -->
+    <div class="form-msg loading" id="msg-loading">⟳ SENDING... Please wait.</div>
+    <div class="form-msg success" id="msg-success">✅ ENQUIRY SENT SUCCESSFULLY — Our team will contact you within 24 hours!</div>
+    <div class="form-msg error" id="msg-error">✗ SENDING FAILED — Please call us directly: +91 6395107577</div>
+  </div>
+
+</div><!-- /contact-layout -->
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="fn">IC<span>Nova</span></div><div class="ft">Electronics Pvt. Ltd.</div><div class="fd">Import-export of LED lighting, track lights, and electronic components. Ghaziabad, UP — 201009.</div></div>
+    <div class="footer-col"><h4>Navigate</h4><ul><li onclick="showPage('home')">Home</li><li onclick="showPage('products')">Products</li><li onclick="showPage('about')">About</li><li onclick="showPage('contact')">Contact</li></ul></div>
+    <div class="footer-col"><h4>Products</h4><ul><li>LED Lighting</li><li>Track / Housing</li><li>Components</li><li>Drivers</li></ul></div>
+    <div class="footer-col"><h4>Reach Us</h4><ul><li>+91 6395107577</li><li>icnovaelectronics@gmail.com</li><li>www.icnovaelectronics.com</li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ICNova Electronics Pvt. Ltd. All rights reserved.</span></div>
+</footer>
+</div><!-- /CONTACT -->
+
+
+<script>
+/* ══════ MULTICOLOR PARTICLE CANVAS ══════ */
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  const colors = ['#0a84ff','#00d4ff','#00ff88','#ff8c00','#c800ff','#ffd700','#ff3366','#00ffcc','#ff66aa','#44eecc','#ffaa00','#6644ff'];
+  let W, H, particles = [];
+
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize); resize();
+
+  function Particle(){
+    this.reset = function(){
+      this.x = Math.random()*W;
+      this.y = Math.random()*H;
+      this.vx = (Math.random()-0.5)*0.9;
+      this.vy = (Math.random()-0.5)*0.9;
+      this.r = Math.random()*2.5+0.8;
+      this.col = colors[Math.floor(Math.random()*colors.length)];
+      this.alpha = Math.random()*0.7+0.2;
+      this.life = Math.random()*300+100;
+      this.age = 0;
+    };
+    this.reset();
+    this.age = Math.random()*this.life; // stagger start
+  }
+
+  for(let i=0;i<200;i++) particles.push(new Particle());
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+
+    // Draw connecting lines
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        let dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+        let dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<120){
+          ctx.beginPath();
+          ctx.strokeStyle=particles[i].col;
+          ctx.globalAlpha=(1-dist/120)*0.25;
+          ctx.lineWidth=0.5;
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw particles
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy; p.age++;
+      if(p.x<0||p.x>W) p.vx*=-1;
+      if(p.y<0||p.y>H) p.vy*=-1;
+      if(p.age>p.life) p.reset();
+
+      let fadeRatio = p.age<30 ? p.age/30 : p.age>p.life-30 ? (p.life-p.age)/30 : 1;
+      ctx.globalAlpha = p.alpha * fadeRatio;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.col;
+      ctx.fill();
+
+      // Glow dot
+      ctx.globalAlpha = p.alpha * fadeRatio * 0.3;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r*3,0,Math.PI*2);
+      ctx.fillStyle=p.col;
+      ctx.fill();
+    });
+
+    ctx.globalAlpha=1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ══════ LOADER ══════ */
+function hideLoader(){try{var l=document.getElementById('loader');if(l){l.classList.add('hide');l.style.display='none';}}catch(e){}}
+setTimeout(hideLoader,1500);setTimeout(hideLoader,3000);
+
+/* ══════ NAV SCROLL ══════ */
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
+  var bt=document.getElementById('backTop');if(bt)bt.classList.toggle('show',window.scrollY>400);
+});
+
+/* ══════ PAGE NAV ══════ */
+function showPage(name){
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p=>{
+    p.classList.remove('active');
+    p.style.display='none';
+  });
+  // Show target page
+  const pg = document.getElementById('page-'+name);
+  if(pg){ pg.classList.add('active'); pg.style.display='block'; }
+  // Update nav active state
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const navEl = document.getElementById('nav-'+name);
+  if(navEl) navEl.classList.add('active');
+  // Trigger scroll reveal on new page
+  setTimeout(()=>{
+    document.querySelectorAll('.reveal,.reveal-scale,.reveal-left,.reveal-right').forEach(el=>{
+      el.classList.add('visible');
+    });
+  }, 80);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ══════ PRODUCT FILTER ══════ */
+function filterProd(cat){
+  if(!document.getElementById('page-products').classList.contains('active')){
+    showPage('products');
+  }
+  setTimeout(()=>{
+    // Reset all filter buttons
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active','trk','out','cmp','drv'));
+    // Activate correct button
+    const map={'all':'fb-all','led':'fb-led','track':'fb-track','outdoor':'fb-outdoor','components':'fb-components','drivers':'fb-drivers','dmx':'fb-dmx'};
+    const clsMap={'track':'trk','outdoor':'out','components':'cmp','drivers':'drv','dmx':'dmx'};
+    const btn=document.getElementById(map[cat]);
+    if(btn){
+      btn.classList.add('active');
+      if(clsMap[cat]) btn.classList.add(clsMap[cat]);
+    }
+    // Filter cards
+    document.querySelectorAll('.prod-card').forEach(c=>{
+      const show = cat==='all' || c.dataset.cat===cat;
+      c.style.display=show?'block':'none';
+      if(show) c.style.animation='fadeIn 0.4s ease';
+    });
+  },100);
+}
+/* For category clicks from home, also accept outdoor */
+function filterOutdoor(){ filterProd('outdoor'); }
+
+/* ══════ MOBILE MENU ══════ */
+function toggleMob(){
+  const m=document.getElementById('mobileMenu');
+  m.style.display = m.style.display==='none' ? 'flex' : 'none';
+}
+
+/* ══════ WORKING CONTACT FORM (FormSubmit.co) ══════ */
+async function submitForm(){
+  var name    = document.getElementById('f-name').value.trim();
+  var phone   = document.getElementById('f-phone').value.trim();
+  var company = document.getElementById('f-company').value.trim();
+  var email   = document.getElementById('f-email').value.trim();
+  var cat     = document.getElementById('f-cat').value;
+  var qty     = document.getElementById('f-qty').value.trim();
+  var city    = document.getElementById('f-city').value.trim();
+  var msg     = document.getElementById('f-msg').value.trim();
+
+  if(!name || !phone || !cat){
+    showMsg('error','Please fill required fields: Name, Phone, Product Category');
+    return;
+  }
+  if(phone.replace(/\D/g,'').length < 10){
+    showMsg('error','Please enter a valid 10-digit phone number');
+    return;
+  }
+
+  var submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'SENDING...';
+  showMsg('loading');
+
+  var formData = new FormData();
+  formData.append('_subject', 'New Enquiry from ' + name + ' - ICNova Electronics');
+  formData.append('_template', 'table');
+  formData.append('_captcha', 'false');
+  formData.append('Name', name);
+  formData.append('Phone', phone);
+  formData.append('Company', company || 'Not provided');
+  formData.append('Email', email || 'Not provided');
+  formData.append('Product', cat);
+  formData.append('Quantity', qty || 'Not specified');
+  formData.append('City', city || 'Not specified');
+  formData.append('Message', msg || 'No message');
+
+  var sent = false;
+  try {
+    var res = await fetch('https://formsubmit.co/icnovaelectronics@gmail.com', {
+      method: 'POST',
+      body: formData
+    });
+    if(res.ok){ sent = true; showMsg('success'); clearForm(); }
+  } catch(e){ console.log('FormSubmit failed, using mailto'); }
+
+  if(!sent){
+    var bodyText = 'New Enquiry\n\nName: ' + name + '\nPhone: ' + phone +
+      '\nCompany: ' + (company||'N/A') + '\nEmail: ' + (email||'N/A') +
+      '\nProduct: ' + cat + '\nQty: ' + (qty||'N/A') +
+      '\nCity: ' + (city||'N/A') + '\nMessage: ' + (msg||'N/A');
+    window.location.href = 'mailto:icnovaelectronics@gmail.com' +
+      '?subject=' + encodeURIComponent('Enquiry from ' + name + ' - ICNova') +
+      '&body=' + encodeURIComponent(bodyText);
+    showMsg('success');
+    clearForm();
+  }
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'SEND ENQUIRY';
+}
+
+function showMsg(type, customText){
+  ['loading','success','error'].forEach(function(t){
+    var el = document.getElementById('msg-'+t);
+    if(el) el.style.display='none';
+  });
+  var el = document.getElementById('msg-'+type);
+  if(el){
+    if(customText) el.textContent = customText;
+    el.style.display = 'block';
+    if(type !== 'loading') setTimeout(function(){ el.style.display='none'; }, 6000);
+  }
+}
+
+function clearForm(){
+  ['f-name','f-company','f-phone','f-email','f-cat','f-qty','f-city','f-msg'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+}
+
+/* ═══ SCROLL REVEAL ═══ */
+(function(){
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  },{threshold:0.1});
+  window.addEventListener('load', function(){
+    document.querySelectorAll('.page.active .reveal,.page.active .reveal-scale').forEach(function(el){ obs.observe(el); });
+  });
+})();
+
+</script>
+</body>
+</html>
