@@ -1,0 +1,14 @@
+trigger:
+- main
+
+pool:
+  name: Default   # ✅ self-hosted agent
+
+steps:
+- script: echo "🔥 Running on self-hosted agent (EC2)"
+  displayName: 'Test'
+
+- script: |
+    echo "📂 Files:"
+    ls -la
+  displayName: 'List Files'
