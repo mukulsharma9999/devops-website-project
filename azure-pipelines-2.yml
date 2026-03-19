@@ -1,0 +1,25 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo "🔥 Microsoft hosted agent working"
+  displayName: 'Test 1'
+
+- script: |
+    echo "📂 Repo files:"
+    ls -la
+  displayName: 'List Files'
+
+- script: |
+    echo "📄 Showing index.html content:"
+    cat index.html
+  displayName: 'Read HTML'
+
+- script: |
+    echo "📦 Creating zip file..."
+    zip -r website.zip .
+    ls -la
+  displayName: 'Create ZIP'
