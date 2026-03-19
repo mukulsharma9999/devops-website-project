@@ -2,13 +2,17 @@ trigger:
 - main
 
 pool:
-  name: Default   # ✅ self-hosted agent
+  name: Default
 
 steps:
-- script: echo "🔥 Running on self-hosted agent (EC2)"
-  displayName: 'Test'
-
 - script: |
-    echo "📂 Files:"
-    ls -la
-  displayName: 'List Files'
+    echo "🚀 Cleaning old files..."
+
+    sudo rm -rf /var/www/html/*
+
+    echo "📂 Copying new files..."
+
+    sudo cp -r * /var/www/html/
+
+    echo "✅ Deployment done"
+  displayName: 'Clean and Deploy Website'
