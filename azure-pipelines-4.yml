@@ -4,15 +4,58 @@ trigger:
 pool:
   name: Default
 
-steps:
-- script: |
-    echo "🚀 Cleaning old files..."
+stages:
 
-    sudo rm -rf /var/www/html/*
+# 🔹 Stage 1: Build
+- stage: Build
+  jobs:
+  - job: BuildJob
+    steps:
 
-    echo "📂 Copying new files..."
+    - script: |
+        echo "📦 Creating artifact..."
 
-    sudo cp -r * /var/www/html/
+        mkdir -p $(Build.ArtifactStagingDirectory)
+        cp -r * $(Build.ArtifactStagingDirectory)/
 
-    echo "✅ Deployment done"
-  displayName: 'Clean and Deploy Website'
+      displayName: 'Copy files to staging'
+
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/website.zip'
+        replaceExistingArchive: true
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+
+
+# 🔹 Stage 2: Deploy
+- stage: Deploy
+  dependsOn: Build
+  jobs:
+  - job: DeployJob
+    steps:
+
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        artifactName: 'drop'
+        downloadPath: '$(System.ArtifactsDirectory)'
+
+    - script: |
+        echo "🚀 Deploying artifact..."
+
+        cd $(System.ArtifactsDirectory)/drop
+
+        unzip -o website.zip -d website
+
+        sudo rm -rf /var/www/html/*
+        sudo cp -r website/* /var/www/html/
+
+        echo "✅ Deployment done"
+
+      displayName: 'Deploy to EC2'
